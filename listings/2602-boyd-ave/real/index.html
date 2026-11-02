@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#14161a">
+<title>2602 Boyd Ave 3D Tour</title>
+<style>
+  :root{ --glass:rgba(20,22,26,.84); --line:rgba(255,255,255,.14); --text:#f3f1ec; --muted:rgba(243,241,236,.66); --accent:#e0a066 }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow:hidden;background:#14161a;color:var(--text);
+    font-family:ui-sans-serif,"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;-webkit-user-select:none;user-select:none;touch-action:none}
+  canvas#c{position:fixed;inset:0;width:100%;height:100%;display:block;outline:none}
+  .card{background:var(--glass);border:1px solid var(--line);border-radius:14px}
+  button{font:inherit;color:var(--text);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:10px;
+    padding:9px 12px;font-size:13px;cursor:pointer;white-space:nowrap}
+  button:hover{background:rgba(255,255,255,.15)}
+  button.on{background:var(--accent);border-color:var(--accent);color:#1b1408;font-weight:600}
+  .primary{background:var(--accent);border-color:var(--accent);color:#1b1408;font-weight:650;padding:12px 26px;font-size:15px}
+  #top{position:fixed;top:calc(10px + env(safe-area-inset-top));left:10px;right:10px;display:flex;justify-content:space-between;gap:8px;pointer-events:none;z-index:3}
+  #top>*{pointer-events:auto}
+  #title{padding:9px 14px;min-width:0}
+  #title b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #title span{font-size:12px;color:var(--muted)}
+  #btns{display:flex;gap:8px}
+  #btns button{width:44px;height:44px;padding:0;display:grid;place-items:center;border-radius:12px;background:var(--glass)}
+  #room{position:fixed;left:50%;top:calc(66px + env(safe-area-inset-top));transform:translateX(-50%);padding:6px 14px;font-size:13px;font-weight:600;z-index:3;white-space:nowrap}
+  /* small corner minimap; tap it (or the expand button) for the big plan with room buttons */
+  #mapwrap{position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));padding:6px;z-index:4;border-radius:12px}
+  #mapwrap.hidden{display:none}
+  #map{display:block;border-radius:7px;cursor:pointer;touch-action:none}
+  #mapsize{position:absolute;top:4px;right:4px;width:26px;height:26px;padding:0;display:grid;place-items:center;border-radius:7px;background:rgba(20,22,26,.7)}
+  #maphint,#rooms{display:none}
+  #mapwrap.big{padding:10px}
+  #mapwrap.big #maphint{display:block;font-size:11px;color:var(--muted);margin-top:6px;text-align:center}
+  #mapwrap.big #rooms{display:flex}
+  #rooms{flex-wrap:wrap;gap:6px;margin-top:8px;max-width:340px}
+  #rooms button{padding:6px 9px;font-size:12px}
+  #joyzone{position:fixed;left:0;bottom:0;width:50%;height:55%;z-index:2;display:none}
+  #joy{position:fixed;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:2px solid rgba(255,255,255,.45);
+    background:rgba(255,255,255,.06);pointer-events:none;display:none;z-index:5}
+  #joy i{position:absolute;left:50%;top:50%;width:50px;height:50px;margin:-25px 0 0 -25px;border-radius:50%;background:rgba(255,255,255,.55)}
+  #joyhint{position:fixed;left:calc(26px + env(safe-area-inset-left));bottom:calc(26px + env(safe-area-inset-bottom));width:120px;height:120px;border-radius:50%;
+    border:2px dashed rgba(255,255,255,.5);display:none;place-items:center;font-size:12px;color:#fff;text-shadow:0 1px 3px #000;z-index:2;pointer-events:none}
+  body.touch #joyhint{display:grid} body.touch.joying #joyhint{opacity:0}
+  #help{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);font-size:12px;color:var(--muted);padding:7px 14px;z-index:3;white-space:nowrap}
+  body.touch #help{display:none}
+  #overlay{position:fixed;inset:0;display:grid;place-items:center;background:rgba(10,11,13,.72);z-index:10;transition:opacity .35s}
+  #overlay.hidden{opacity:0;pointer-events:none}
+  #overlay .card{padding:26px 28px;max-width:420px;margin:16px;text-align:center}
+  #overlay h2{margin:4px 0 8px;font-size:23px}
+  #overlay p{color:var(--muted);font-size:14px;line-height:1.5;margin:0 0 16px}
+  #bar{height:6px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden;margin:4px 0 16px}
+  #bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+  #keys{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;text-align:left;font-size:13px;margin:0 auto 18px;width:max-content}
+  kbd{background:rgba(255,255,255,.1);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-family:inherit;font-size:12px}
+  #err{display:none;color:#ffb4a8;font-size:13px;margin-top:10px}
+  @media (max-width:700px){
+    #mapwrap.big{left:50%;right:auto;top:50%;bottom:auto;transform:translate(-50%,-50%);max-width:calc(100vw - 20px);max-height:calc(100dvh - 20px);overflow:auto}
+    #rooms{max-width:none}
+    #room{top:calc(64px + env(safe-area-inset-top))}
+    #title{padding:0 12px;height:44px;display:flex;align-items:center}
+    #title span{display:none}
+  }
+</style>
+</head>
+<body>
+<canvas id="c" tabindex="0"></canvas>
+<div id="top">
+  <div id="title" class="card"><b>2602 Boyd Ave · Killeen, TX</b><span>4 bed · 2 bath · 1,607 sq ft · 3D walkthrough</span></div>
+  <div id="btns">
+    <button id="furnBtn" class="card" aria-label="Furnish"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3"/><path d="M2 13a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v5H2z"/><path d="M5 18v2M19 18v2"/></svg></button>
+    <button id="mapBtn" class="card" aria-label="Floor plan"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></button>
+    <button id="fsBtn" class="card" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+</div>
+<div id="room" class="card">Front yard</div>
+<div id="mapwrap" class="card hidden">
+  <canvas id="map"></canvas>
+  <button id="mapsize" aria-label="Bigger map"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></button>
+  <div id="maphint">Tap anywhere on the plan to go there</div>
+  <div id="rooms"></div>
+</div>
+<div id="joyzone"></div>
+<div id="joyhint">Move</div>
+<div id="joy"><i></i></div>
+<div id="help" class="card"><kbd>W A S D</kbd> walk · drag to look · <kbd>Shift</kbd> faster · <kbd>M</kbd> floor plan</div>
+
+<div id="overlay">
+  <div class="card">
+    <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)">3D walkthrough</div>
+    <h2>2602 Boyd Ave</h2>
+    <p>Walk through every room of the home. The floor plan button jumps you to any room.</p>
+    <div id="bar"><i></i></div>
+    <div id="keys"></div>
+    <button id="start" class="primary" disabled>Loading…</button>
+    <div id="err"></div>
+  </div>
+</div>
+
+<!-- three.js 0.169 is served with the tour (lib/vendor/three), not from a CDN: phones that can't reach
+     the CDN used to sit on "Loading..." forever -->
+<script type="importmap">
+{ "imports": { "three": "../../../lib/vendor/three/build/three.module.js",
+               "three/addons/": "../../../lib/vendor/three/examples/jsm/" } }
+</script>
+<script>
+  // if the 3D code never starts (blocked download, very old browser), say so instead of loading forever
+  setTimeout(() => {
+    if (window.__tourBooted) return;
+    const e = document.getElementById('err'), b = document.getElementById('start');
+    e.style.display = 'block'; e.textContent = 'The 3D viewer did not start. Check your connection, then reload. If it keeps happening, try Chrome or Safari.';
+    b.textContent = 'Reload'; b.disabled = false; b.onclick = () => location.reload();
+  }, 30000);
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+window.__tourBooted = true;
+
+const $ = id => document.getElementById(id);
+const isTouch = matchMedia('(pointer: coarse)').matches;
+if (isTouch) document.body.classList.add('touch');
+$('keys').innerHTML = isTouch
+  ? '<span>Left thumb</span><span>Walk</span><span>Right thumb</span><span>Look around</span><span>Map button</span><span>Jump to any room</span>'
+  : '<span><kbd>W A S D</kbd></span><span>Walk</span><span>Drag mouse</span><span>Look around</span><span><kbd>M</kbd> / map button</span><span>Jump to any room</span>';
+const fail = msg => { const e = $('err'); e.style.display = 'block'; e.textContent = msg; $('start').textContent = 'Reload'; $('start').disabled = false; $('start').onclick = () => location.reload(); };
+
+/* ---------------- renderer (conservative settings so phones don't run out of memory) ---------------- */
+const canvas = $('c');
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias:devicePixelRatio < 1.5, powerPreference:'high-performance' });
+} catch (e) { fail('Your browser could not start 3D graphics. Try Chrome or Safari, or restart the browser.'); throw e; }
+const MAX_DPR = Math.min(devicePixelRatio, isTouch ? 1.5 : 2), MIN_DPR = isTouch ? .6 : .75;
+let dpr = MAX_DPR;
+renderer.setPixelRatio(dpr); renderer.setSize(innerWidth, innerHeight);
+// Lighting is baked in Blender (sun, sky, bounce light, room lights) into per-surface lightmaps;
+// the phone only shows textures. Same AgX tone mapping as the Blender renders.
+const EXPOSURE_IN = 1.0, EXPOSURE_OUT = 0.45;
+renderer.toneMapping = THREE.AgXToneMapping; renderer.toneMappingExposure = EXPOSURE_OUT;
+const scene = new THREE.Scene();
+// sky and fog go through the same exposure + tone mapping as the baked scene, so distant houses fade
+// exactly into the horizon; SKY_K lifts them to look right at the outdoor exposure
+const SKY_K = 2.4, HORIZON = new THREE.Color('#cdd9e4').multiplyScalar(SKY_K), ZENITH = new THREE.Color('#7fa6cf').multiplyScalar(SKY_K);
+scene.background = new THREE.Color('#cdd9e4');
+scene.fog = new THREE.Fog(HORIZON, 50, 150);   // the modelled neighbourhood fades out before its edge
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), .04).texture;   // reflections only (see below)
+// far plane just past the fog: anything there is fully fogged anyway, so don't draw it
+const FAR = 160;
+const camera = new THREE.PerspectiveCamera(72, innerWidth / innerHeight, .05, FAR);
+const backdrop = new THREE.Group(); scene.add(backdrop);      // follows the camera (see loop)
+{ // sky dome: horizon haze to blue overhead, plus far ground so the world doesn't end at the model's edge
+  const R = FAR * .9, g = new THREE.SphereGeometry(R, 32, 16), c = [], p = g.attributes.position;
+  for (let i = 0; i < p.count; i++){ const t = Math.max(0, p.getY(i) / R); const col = HORIZON.clone().lerp(ZENITH, Math.pow(t, .6)); c.push(col.r, col.g, col.b); }
+  g.setAttribute('color', new THREE.Float32BufferAttribute(c, 3));
+  const sky = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ vertexColors:true, side:THREE.BackSide, fog:false, depthWrite:false }));
+  sky.renderOrder = -1; backdrop.add(sky);
+  const far = new THREE.Mesh(new THREE.CircleGeometry(R * .98, 48), new THREE.MeshBasicMaterial({ color:'#3c4a2a' }));
+  far.rotation.x = -Math.PI / 2; far.position.y = -.25; backdrop.add(far);
+}
+scene.fog.far = FAR * .85;
+camera.rotation.order = 'YXZ';
+
+// if the phone drops the GPU context (memory pressure / tab switch), recover instead of showing a frozen page
+canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); $('room').textContent = 'Restoring 3D…'; }, false);
+
+/* ---------------- load plan, collision, lightmaps, model ---------------- */
+let plan, col, lm, hood;
+try {
+  [plan, col, lm, hood] = await Promise.all([
+    ...['../model/plan.json', '../model/collision.json', 'lightmaps.json'].map(u => fetch(u).then(r => r.json())),
+    fetch('hood_collision.json').then(r => r.ok ? r.json() : null).catch(() => null)]);   // neighbourhood (optional)
+} catch (e) { fail('Could not load the house data. Check your connection and reload.'); throw e; }
+$('title').querySelector('b').textContent = plan.name;
+
+const loader = new GLTFLoader();
+let gltf;
+try {
+  gltf = await loader.loadAsync('house.glb', ev => { if (ev.total) $('bar').firstElementChild.style.width = (ev.loaded / ev.total * 100).toFixed(0) + '%'; });
+} catch (e) { fail('Could not load the 3D house. Check your connection and reload.'); throw e; }
+const texLoader = new THREE.TextureLoader(), lmLoads = [], usedMats = new Set();
+gltf.scene.traverse(o => {
+  if (!o.isMesh) return;
+  // house and neighbourhood share materials but each mesh has its own lightmap: give each its own copy
+  if (usedMats.has(o.material)) o.material = o.material.clone();
+  usedMats.add(o.material);
+  const m = o.material, name = m.name || '';
+  for (const t of [m.map, m.normalMap, m.roughnessMap]) if (t) t.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+  const glassy = /glass/.test(name);
+  if (glassy){ m.transparent = true; m.depthWrite = false; m.opacity = .2; }
+  m.side = /leaf|blossom|fence|glass/.test(name) ? THREE.DoubleSide : THREE.FrontSide;
+  const vc = lm.vcol && lm.vcol[o.name];
+  if (vc){
+    // trees and small neighbourhood parts: baked light stored per vertex (divided by its scale)
+    const leaf = /leaf/.test(name);
+    // leaves were baked as solid cards, so crowns came out too dark inside: lift the shadows a bit
+    // (light really does scatter through foliage); same for the bark under them
+    const lift = leaf ? .32 : /bark/.test(name) ? .4 : 0, C = o.geometry.attributes.color;
+    if (lift && C) for (let i = 0; i < C.count; i++)
+      C.setXYZ(i, lift + (1 - lift) * C.getX(i), lift + (1 - lift) * C.getY(i), lift + (1 - lift) * C.getZ(i));
+    o.material = new THREE.MeshBasicMaterial({ name, map:m.map || null, color:m.color.clone().multiplyScalar(vc.scale),
+      vertexColors:true, side:leaf ? THREE.DoubleSide : THREE.FrontSide, alphaTest:leaf ? .5 : 0 });
+    if (o.material.map) o.material.map.anisotropy = 4;
+    o.matrixAutoUpdate = false; o.updateMatrix();
+    return;
+  }
+  const map = lm.maps[o.name];
+  if (map){
+    // baked light: stored gamma-encoded in 0..1, multiplied back by its scale (pi: three's Lambert divides by it)
+    lmLoads.push(texLoader.loadAsync('lightmaps/' + map.file).then(t => {
+      t.colorSpace = THREE.SRGBColorSpace; t.flipY = false; t.channel = 1;
+      m.lightMap = t; m.lightMapIntensity = map.scale * Math.PI; m.envMapIntensity = .12; m.needsUpdate = true;
+    }));
+  } else m.envMapIntensity = 1;          // metals, glass, bulbs: lit by reflections only
+  o.matrixAutoUpdate = false; o.updateMatrix();
+});
+await Promise.all(lmLoads).catch(e => { fail('Could not load the lighting. Check your connection and reload.'); throw e; });
+$('bar').firstElementChild.style.width = '100%';
+scene.add(gltf.scene);
+// Each neighbourhood material is one mesh spanning the whole area, so it would always be drawn in full.
+// Cut them into 48 m tiles (sharing the same vertex buffers, only the index differs) so whatever is
+// behind you or past the fog gets culled.
+const TILE = 48;
+function tileMesh(mesh){
+  const g = mesh.geometry, P = g.attributes.position, idx = g.index ? g.index.array : null;
+  const nTri = (idx ? idx.length : P.count) / 3;
+  if (nTri < 400) return;
+  const vi = idx ? i => idx[i] : i => i, buckets = new Map();
+  for (let t = 0; t < nTri; t++){
+    const a = vi(3 * t), b = vi(3 * t + 1), c = vi(3 * t + 2);
+    const cx = (P.getX(a) + P.getX(b) + P.getX(c)) / 3, cz = (P.getZ(a) + P.getZ(b) + P.getZ(c)) / 3;
+    const k = Math.floor(cx / TILE) + ',' + Math.floor(cz / TILE);
+    let arr = buckets.get(k); if (!arr) buckets.set(k, arr = []);
+    arr.push(a, b, c);
+  }
+  if (buckets.size < 2) return;
+  const parent = mesh.parent;
+  for (const arr of buckets.values()){
+    const tg = new THREE.BufferGeometry();
+    for (const name in g.attributes) tg.setAttribute(name, g.attributes[name]);
+    tg.setIndex(arr);
+    const box = new THREE.Box3(), v = new THREE.Vector3();          // bounds of this tile only
+    for (const i of arr) box.expandByPoint(v.fromBufferAttribute(P, i));
+    tg.boundingBox = box; tg.boundingSphere = box.getBoundingSphere(new THREE.Sphere());
+    const m = new THREE.Mesh(tg, mesh.material); m.name = mesh.name;
+    m.matrix.copy(mesh.matrix); m.matrixAutoUpdate = false; m.renderOrder = mesh.renderOrder;
+    parent.add(m);
+  }
+  parent.remove(mesh);
+}
+const hoodMeshes = []; gltf.scene.traverse(o => { if (o.isMesh && /^hood_/.test(o.name)) hoodMeshes.push(o); });
+hoodMeshes.forEach(tileMesh);
+renderer.compile(scene, camera);
+
+/* ---------------- collision: player is a circle in the floor plan ---------------- */
+const R = .2, EYE = 1.6;
+const segs = [...col.walls.map(s => ({ x0:s[0], z0:s[1], x1:s[2], z1:s[3], t:s[4] / 2 })),
+              ...col.fence.map(s => ({ x0:s[0], z0:s[1], x1:s[2], z1:s[3], t:.04 }))];
+const boxes = col.boxes.map(b => ({ x0:b[0], z0:b[1], x1:b[2], z1:b[3] }));
+if (hood){   // neighbour houses, side fences, trees, mailboxes
+  for (const s of hood.segs) segs.push({ x0:s[0], z0:s[1], x1:s[2], z1:s[3], t:s[4] / 2 });
+  for (const b of hood.boxes) boxes.push({ x0:b[0], z0:b[1], x1:b[2], z1:b[3] });
+}
+const [bx0, bz0, bx1, bz1] = hood ? hood.bounds : col.bounds;
+// street names for the label at the top ("Boyd Avenue" -> "Boyd Ave")
+const streets = (hood ? hood.roads : []).map(r => ({ name:r.name.replace(/ Avenue$/, ' Ave').replace(/ Drive$/, ' Dr').replace(/ Road$/, ' Rd'), pts:r.pts }));
+function streetAt(x, z){
+  let best = null, bd = 6.5;
+  for (const r of streets) for (let i = 1; i < r.pts.length; i++){
+    const [ax, az] = r.pts[i - 1], [cx, cz] = r.pts[i], ex = cx - ax, ez = cz - az;
+    const k = Math.max(0, Math.min(1, ((x - ax) * ex + (z - az) * ez) / (ex * ex + ez * ez || 1)));
+    // side streets start on the centre line of the street they join: favour the through street there
+    const d = Math.hypot(x - ax - ex * k, z - az - ez * k) - (i === 1 && k < .3 || i === r.pts.length - 1 && k > .7 ? 0 : 1.5);
+    if (d < bd){ bd = d; best = r.name; }
+  }
+  return best;
+}
+const LOT = hood && hood.lot;
+function resolve(p){
+  for (let it = 0; it < 4; it++){
+    let moved = false;
+    for (const s of segs){
+      const ex = s.x1 - s.x0, ez = s.z1 - s.z0, L2 = ex * ex + ez * ez || 1e-9;
+      let k = ((p.x - s.x0) * ex + (p.z - s.z0) * ez) / L2; k = Math.max(0, Math.min(1, k));
+      const qx = s.x0 + ex * k, qz = s.z0 + ez * k; let dx = p.x - qx, dz = p.z - qz;
+      const d = Math.hypot(dx, dz), min = R + s.t;
+      if (d < min){
+        if (d < 1e-6){ dx = -ez; dz = ex; const l = Math.hypot(dx, dz) || 1; dx /= l; dz /= l; } else { dx /= d; dz /= d; }
+        p.x = qx + dx * min; p.z = qz + dz * min; moved = true;
+      }
+    }
+    for (const b of boxes){
+      const cx = Math.max(b.x0, Math.min(p.x, b.x1)), cz = Math.max(b.z0, Math.min(p.z, b.z1));
+      let dx = p.x - cx, dz = p.z - cz; const d = Math.hypot(dx, dz);
+      if (d < R){
+        if (d < 1e-6){ // centre inside the box: leave by the nearest side
+          const opts = [[p.x - b.x0, -1, 0], [b.x1 - p.x, 1, 0], [p.z - b.z0, 0, -1], [b.z1 - p.z, 0, 1]].sort((a, c) => a[0] - c[0])[0];
+          p.x += opts[1] * (opts[0] + R); p.z += opts[2] * (opts[0] + R);
+        } else { p.x = cx + dx / d * R; p.z = cz + dz / d * R; }
+        moved = true;
+      }
+    }
+    p.x = Math.max(bx0, Math.min(bx1, p.x)); p.z = Math.max(bz0, Math.min(bz1, p.z));
+    if (!moved) break;
+  }
+  return p;
+}
+const isFree = (x, z) => { const p = resolve({ x, z }); return Math.hypot(p.x - x, p.z - z) < 1e-4; };
+function freeNear(x, z){
+  if (isFree(x, z)) return { x, z };
+  for (let r = .15; r < 2; r += .15) for (let a = 0; a < 16; a++){
+    const px = x + Math.cos(a / 16 * Math.PI * 2) * r, pz = z + Math.sin(a / 16 * Math.PI * 2) * r;
+    if (isFree(px, pz)) return { x:px, z:pz };
+  }
+  return resolve({ x, z });
+}
+
+/* ---------------- player + input ---------------- */
+// yaw/pitch are where the input points; view.* eases toward them so turning never jerks
+const player = { x:plan.spawn.x, z:plan.spawn.z, yaw:plan.spawn.yaw, pitch:-.05, vx:0, vz:0 };
+const view = { yaw:player.yaw, pitch:player.pitch, snap(){ this.yaw = player.yaw; this.pitch = player.pitch; } };
+const keys = {};
+addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  keys[e.code] = true;
+  if (e.code === 'KeyM') toggleMap();
+  if (/^Arrow/.test(e.code) || e.code === 'Space') e.preventDefault();
+});
+addEventListener('keyup', e => keys[e.code] = false);
+addEventListener('blur', () => { for (const k in keys) keys[k] = false; });
+const look = (dx, dy, k) => { player.yaw -= dx * k; player.pitch = Math.max(-1.25, Math.min(1.25, player.pitch - dy * k)); };
+// the furnishing tool claims a press (capture phase, before these handlers) when it lands on a piece of furniture
+const input = { claimed:false };
+// mouse: drag to look (no pointer-lock: simpler and never "traps" the cursor)
+let drag = null;
+canvas.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse' && !input.claimed){ drag = { x:e.clientX, y:e.clientY }; canvas.setPointerCapture(e.pointerId); canvas.focus(); } });
+canvas.addEventListener('pointermove', e => { if (drag && e.pointerType === 'mouse'){ look(e.clientX - drag.x, e.clientY - drag.y, .0042); drag = { x:e.clientX, y:e.clientY }; } });
+canvas.addEventListener('pointerup', () => drag = null);
+// touch: left-bottom joystick, anywhere else = look
+const joy = { id:null, ox:0, oy:0, x:0, y:0 }, lookT = { id:null, x:0, y:0 }, joyEl = $('joy');
+function touchStart(e){
+  for (const t of e.changedTouches){
+    if (input.claimed) continue;
+    const inZone = t.clientX < innerWidth * .5 && t.clientY > innerHeight * .4;
+    if (inZone && joy.id === null){
+      Object.assign(joy, { id:t.identifier, ox:t.clientX, oy:t.clientY, x:0, y:0 });
+      joyEl.style.display = 'block'; joyEl.style.left = t.clientX + 'px'; joyEl.style.top = t.clientY + 'px'; document.body.classList.add('joying');
+    } else if (lookT.id === null) Object.assign(lookT, { id:t.identifier, x:t.clientX, y:t.clientY });
+  }
+}
+function touchMove(e){
+  for (const t of e.changedTouches){
+    if (t.identifier === joy.id){
+      let dx = t.clientX - joy.ox, dy = t.clientY - joy.oy; const l = Math.hypot(dx, dy), m = 50;
+      if (l > m){ dx *= m / l; dy *= m / l; }
+      joy.x = dx / m; joy.y = -dy / m; joyEl.firstElementChild.style.transform = `translate(${dx}px,${dy}px)`;
+    } else if (t.identifier === lookT.id){ look(t.clientX - lookT.x, t.clientY - lookT.y, .0055); lookT.x = t.clientX; lookT.y = t.clientY; }
+  }
+}
+function touchEnd(e){
+  for (const t of e.changedTouches){
+    if (t.identifier === joy.id){ joy.id = null; joy.x = joy.y = 0; joyEl.style.display = 'none'; document.body.classList.remove('joying'); joyEl.firstElementChild.style.transform = ''; }
+    if (t.identifier === lookT.id) lookT.id = null;
+  }
+}
+for (const el of [canvas]){
+  el.addEventListener('touchstart', touchStart, { passive:true }); el.addEventListener('touchmove', touchMove, { passive:true });
+  el.addEventListener('touchend', touchEnd); el.addEventListener('touchcancel', touchEnd);
+}
+document.addEventListener('gesturestart', e => e.preventDefault());
+
+/* ---------------- floor plan ---------------- */
+const map = $('map'), mctx = map.getContext('2d'), mapwrap = $('mapwrap');
+const navRooms = plan.rooms.filter(r => r.nav !== false);
+const HX0 = -1, HX1 = 25.6, HZ0 = -2.2, HZ1 = 9.6;            // area drawn on the plan
+let MS = 14, mapKey = '';
+const mapBig = () => mapwrap.classList.contains('big');
+function sizeMap(){
+  const avail = mapBig() ? Math.min(innerWidth - 40, 560) : Math.min(innerWidth * .42, 210);
+  MS = mapBig() ? Math.max(10, Math.min(24, avail / (HX1 - HX0))) : avail / (HX1 - HX0);
+  const d = Math.min(devicePixelRatio, 2);
+  map.width = (HX1 - HX0) * MS * d; map.height = (HZ1 - HZ0) * MS * d;
+  map.style.width = (HX1 - HX0) * MS + 'px'; map.style.height = (HZ1 - HZ0) * MS + 'px';
+  mctx.setTransform(d, 0, 0, d, 0, 0); mapKey = '';
+}
+const MX = x => (x - HX0) * MS, MZ = z => (z - HZ0) * MS;
+const roomAt = (x, z) => plan.rooms.find(r => x >= r.x0 && x <= r.x1 && z >= r.z0 && z <= r.z1);
+function drawMap(){
+  const key = `${player.x.toFixed(2)}|${player.z.toFixed(2)}|${player.yaw.toFixed(2)}`;
+  if (key === mapKey) return; mapKey = key;
+  mctx.clearRect(0, 0, map.width, map.height);
+  const cur = roomAt(player.x, player.z);
+  for (const r of plan.rooms){
+    mctx.fillStyle = r === cur ? 'rgba(224,160,102,.35)' : 'rgba(255,255,255,.07)';
+    mctx.fillRect(MX(r.x0), MZ(r.z0), (r.x1 - r.x0) * MS, (r.z1 - r.z0) * MS);
+  }
+  mctx.strokeStyle = 'rgba(255,255,255,.9)'; mctx.lineCap = 'round';
+  for (const s of col.walls){ mctx.lineWidth = Math.max(2, s[4] * MS); mctx.beginPath(); mctx.moveTo(MX(s[0]), MZ(s[1])); mctx.lineTo(MX(s[2]), MZ(s[3])); mctx.stroke(); }
+  mctx.fillStyle = 'rgba(255,255,255,.75)'; mctx.font = `600 ${Math.max(9, MS * .55)}px system-ui,sans-serif`; mctx.textAlign = 'center'; mctx.textBaseline = 'middle';
+  if (mapBig()) for (const r of navRooms) mctx.fillText(r.name.replace(' bedroom', ' bed').replace('Bedroom ', 'Bed '), MX((r.x0 + r.x1) / 2), MZ((r.z0 + r.z1) / 2));
+  const px = MX(Math.max(HX0, Math.min(HX1, player.x))), pz = MZ(Math.max(HZ0, Math.min(HZ1, player.z)));
+  mctx.save(); mctx.translate(px, pz); mctx.rotate(-player.yaw);
+  const gr = mctx.createRadialGradient(0, 0, 0, 0, 0, MS * 2.6); gr.addColorStop(0, 'rgba(224,160,102,.6)'); gr.addColorStop(1, 'rgba(224,160,102,0)');
+  mctx.fillStyle = gr; mctx.beginPath(); mctx.moveTo(0, 0); mctx.arc(0, 0, MS * 2.6, -Math.PI / 2 - .55, -Math.PI / 2 + .55); mctx.fill();
+  mctx.fillStyle = '#e0a066'; mctx.strokeStyle = '#1b1408'; mctx.lineWidth = 2; mctx.beginPath(); mctx.arc(0, 0, mapBig() ? 6 : 4.5, 0, Math.PI * 2); mctx.fill(); mctx.stroke();
+  mctx.restore();
+}
+function goTo(x, z, faceRoom){
+  const p = freeNear(x, z); player.x = p.x; player.z = p.z;
+  if (faceRoom){ // look toward the room's middle (or keep heading if already there)
+    const cx = (faceRoom.x0 + faceRoom.x1) / 2, cz = (faceRoom.z0 + faceRoom.z1) / 2;
+    if (Math.hypot(cx - p.x, cz - p.z) > .3) player.yaw = Math.atan2(-(cx - p.x), -(cz - p.z));
+  }
+  player.pitch = -.05; player.vx = player.vz = 0; view.snap(); mapKey = '';
+}
+const setMapBig = big => { mapwrap.classList.toggle('big', big); $('mapsize').setAttribute('aria-label', big ? 'Smaller map' : 'Bigger map'); sizeMap(); };
+const closeBig = () => { setMapBig(false); };
+map.addEventListener('click', e => {
+  if (!mapBig()){ setMapBig(true); return; }       // the small map is too small to aim at: open the big one
+  const r = map.getBoundingClientRect();
+  const x = (e.clientX - r.left) / MS + HX0, z = (e.clientY - r.top) / MS + HZ0;
+  goTo(x, z, null);
+  closeBig();
+});
+$('mapsize').onclick = () => setMapBig(!mapBig());
+for (const r of navRooms){
+  const b = document.createElement('button'); b.textContent = r.name; b.dataset.id = r.id;
+  b.onclick = () => {
+    // stand near the doorway side of the room, looking in: start at the centre, nudged back toward the larger half
+    const cx = (r.x0 + r.x1) / 2, cz = (r.z0 + r.z1) / 2;
+    goTo(cx + (r.x1 - r.x0) * .22, cz + (r.z1 - r.z0) * .22, r);
+    closeBig();
+  };
+  $('rooms').appendChild(b);
+}
+const toggleMap = () => { if (mapBig() && !mapwrap.classList.contains('hidden')) closeBig(); else mapwrap.classList.toggle('hidden'); mapKey = ''; };
+$('mapBtn').onclick = toggleMap;
+if (!document.documentElement.requestFullscreen) $('fsBtn').style.display = 'none';
+$('fsBtn').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {});
+
+/* ---------------- start ---------------- */
+let started = false;
+$('start').disabled = false; $('start').textContent = 'Start walkthrough';
+$('start').onclick = () => { started = true; $('overlay').classList.add('hidden'); canvas.focus(); mapwrap.classList.remove('hidden'); };
+// opened from the listing page's play button: the press already happened there, skip the start screen
+if (new URLSearchParams(location.search).has('autostart')) $('start').click();
+
+function onResize(){
+  camera.aspect = innerWidth / innerHeight; camera.fov = camera.aspect < 1 ? 82 : 72; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight); sizeMap();
+}
+addEventListener('resize', onResize); onResize();
+window.tour = { player, resolve, isFree, freeNear, goTo, plan, col, segs, boxes, input, canvas, renderer, scene, camera };
+
+/* ---------------- buyer furnishing tool (lazy: furniture models load only when placed) ---------------- */
+import('../../../lib/furnish.js')
+  .then(m => m.initFurnish(window.tour, { lib:'../../../lib/furniture/', presets:'../model/presets.json', button:$('furnBtn'), started:() => started }))
+  .catch(e => { console.warn('furnishing tool unavailable', e); $('furnBtn').style.display = 'none'; });
+
+/* ---------------- loop ---------------- */
+const WALK = 2.0;
+let frameN = 0, lastStreet = null, calm = 0;
+const clock = new THREE.Clock(); let bob = 0, bobAmp = 0, fpsN = 0, fpsT = 0, warm = 2, lastRoom = '';
+renderer.setAnimationLoop(() => {
+  const raw = clock.getDelta(), dt = Math.min(raw, .05);
+  if (started){
+    let f = 0, s = 0;
+    if (keys.KeyW || keys.ArrowUp) f++; if (keys.KeyS || keys.ArrowDown) f--;
+    if (keys.KeyA) s--; if (keys.KeyD) s++;
+    if (keys.ArrowLeft) player.yaw += 1.7 * dt; if (keys.ArrowRight) player.yaw -= 1.7 * dt;
+    f += joy.y; s += joy.x;
+    const l = Math.hypot(f, s); if (l > 1){ f /= l; s /= l; }
+    const speed = (keys.ShiftLeft || keys.ShiftRight) ? WALK * 1.8 : WALK;
+    const sn = Math.sin(view.yaw), cs = Math.cos(view.yaw);
+    // ease velocity toward the input (quick start, softer stop) instead of jumping to full speed
+    const tvx = (-sn * f + cs * s) * speed, tvz = (-cs * f - sn * s) * speed;
+    const ease = 1 - Math.exp(-dt * (l > .01 ? 9 : 7));
+    player.vx += (tvx - player.vx) * ease; player.vz += (tvz - player.vz) * ease;
+    if (Math.hypot(player.vx, player.vz) < .01) player.vx = player.vz = 0;
+    const mx = player.vx * dt, mz = player.vz * dt, ox = player.x, oz = player.z;
+    const steps = Math.max(1, Math.ceil(Math.hypot(mx, mz) / .05));   // small steps: can never tunnel through a wall
+    for (let i = 0; i < steps; i++){ const p = resolve({ x:player.x + mx / steps, z:player.z + mz / steps }); player.x = p.x; player.z = p.z; }
+    // walking into a wall slides along it; drop the blocked part of the velocity so it doesn't build up
+    if (dt > 0){ const ax = (player.x - ox) / dt, az = (player.z - oz) / dt; if (Math.hypot(mx, mz) > 1e-5){ player.vx = ax; player.vz = az; } }
+    const moving = Math.min(1, Math.hypot(player.vx, player.vz) / WALK);
+    bob += dt * 7 * moving; bobAmp += (moving - bobAmp) * Math.min(1, dt * 4);
+    camera.position.set(player.x, EYE + Math.sin(bob) * .012 * bobAmp, player.z);
+  } else {
+    player.yaw = plan.spawn.yaw + Math.sin(clock.elapsedTime * .25) * .25;
+    camera.position.set(player.x, EYE, player.z);
+  }
+  const turn = 1 - Math.exp(-dt * 22);
+  view.yaw += (player.yaw - view.yaw) * turn; view.pitch += (player.pitch - view.pitch) * turn;
+  camera.rotation.set(view.pitch, view.yaw, 0);
+  backdrop.position.set(camera.position.x, 0, camera.position.z);
+  const r = roomAt(player.x, player.z);
+  let name = r ? r.name : (player.z < 0 ? 'Front yard' : 'Back yard');
+  if (!r && LOT && !(player.x >= LOT[0] && player.x <= LOT[2] && player.z >= LOT[1] && player.z <= LOT[3]))
+    name = (frameN++ % 15 === 0 ? (lastStreet = streetAt(player.x, player.z)) : lastStreet) || 'Neighborhood';
+  // auto-exposure like a camera: sunlit outdoors is several times brighter than indoors; ease between them
+  const targetExp = r ? EXPOSURE_IN : EXPOSURE_OUT;
+  renderer.toneMappingExposure += (targetExp - renderer.toneMappingExposure) * Math.min(1, dt * 2.5);
+  if (name !== lastRoom){ lastRoom = name; $('room').textContent = name; $('rooms').querySelectorAll('button').forEach(b => b.classList.toggle('on', r && b.dataset.id === r.id)); }
+  if (!mapwrap.classList.contains('hidden')) drawMap();
+  renderer.render(scene, camera);
+  // adaptive resolution: if the device can't keep up, render fewer pixels; when it's smooth again
+  // (e.g. another app stopped using the GPU), step back up
+  if ((warm -= raw) < 0 && !document.hidden){
+    fpsN++; fpsT += raw;
+    if (fpsT > 2){
+      const fps = fpsN / fpsT;
+      if (fps < 52 && dpr > MIN_DPR){ dpr = Math.max(MIN_DPR, dpr - .25); renderer.setPixelRatio(dpr); calm = 0; }
+      else if (fps > 57 && dpr < MAX_DPR && ++calm >= 3){ dpr = Math.min(MAX_DPR, dpr + .25); renderer.setPixelRatio(dpr); calm = 0; }
+      fpsN = fpsT = 0;
+    }
+  }
+});
+</script>
+</body>
+</html>

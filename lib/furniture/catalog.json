@@ -1,0 +1,258 @@
+{
+ "license": "CC0 (Poly Haven models, ambientCG materials)",
+ "items": [
+  {
+   "id": "sofa_modern",
+   "name": "Modern sofa",
+   "cat": "Living",
+   "file": "sofa_modern.glb",
+   "thumb": "thumbs/sofa_modern.png",
+   "w": 2.1,
+   "d": 0.92,
+   "h": 0.82,
+   "src": "custom"
+  },
+  {
+   "id": "sofa_leather",
+   "name": "Leather loveseat",
+   "cat": "Living",
+   "file": "sofa_leather.glb",
+   "thumb": "thumbs/sofa_leather.png",
+   "w": 1.807,
+   "d": 0.818,
+   "h": 0.709,
+   "src": "polyhaven:sofa_02"
+  },
+  {
+   "id": "lounge_chair",
+   "name": "Lounge chair",
+   "cat": "Living",
+   "file": "lounge_chair.glb",
+   "thumb": "thumbs/lounge_chair.png",
+   "w": 1.009,
+   "d": 1.19,
+   "h": 1.169,
+   "src": "polyhaven:mid_century_lounge_chair"
+  },
+  {
+   "id": "arm_chair",
+   "name": "Arm chair",
+   "cat": "Living",
+   "file": "arm_chair.glb",
+   "thumb": "thumbs/arm_chair.png",
+   "w": 0.82,
+   "d": 0.987,
+   "h": 1.023,
+   "src": "polyhaven:modern_arm_chair_01"
+  },
+  {
+   "id": "coffee_table",
+   "name": "Coffee table",
+   "cat": "Living",
+   "file": "coffee_table.glb",
+   "thumb": "thumbs/coffee_table.png",
+   "w": 1.202,
+   "d": 0.6,
+   "h": 0.39,
+   "src": "polyhaven:modern_coffee_table_01"
+  },
+  {
+   "id": "coffee_round",
+   "name": "Round coffee table",
+   "cat": "Living",
+   "file": "coffee_round.glb",
+   "thumb": "thumbs/coffee_round.png",
+   "w": 1.301,
+   "d": 1.301,
+   "h": 0.491,
+   "src": "polyhaven:coffee_table_round_01"
+  },
+  {
+   "id": "side_table",
+   "name": "Side table",
+   "cat": "Living",
+   "file": "side_table.glb",
+   "thumb": "thumbs/side_table.png",
+   "w": 0.55,
+   "d": 0.45,
+   "h": 0.551,
+   "src": "polyhaven:side_table_01"
+  },
+  {
+   "id": "tv_console",
+   "name": "TV + console",
+   "cat": "Living",
+   "file": "tv_console.glb",
+   "thumb": "thumbs/tv_console.png",
+   "w": 1.8,
+   "d": 0.42,
+   "h": 1.31,
+   "src": "custom"
+  },
+  {
+   "id": "sideboard",
+   "name": "Sideboard",
+   "cat": "Living",
+   "file": "sideboard.glb",
+   "thumb": "thumbs/sideboard.png",
+   "w": 2.44,
+   "d": 0.52,
+   "h": 0.68,
+   "src": "polyhaven:modern_wooden_cabinet"
+  },
+  {
+   "id": "cube_shelf",
+   "name": "Cube shelf",
+   "cat": "Living",
+   "file": "cube_shelf.glb",
+   "thumb": "thumbs/cube_shelf.png",
+   "w": 1.078,
+   "d": 0.372,
+   "h": 1.556,
+   "src": "polyhaven:wooden_display_shelves_01"
+  },
+  {
+   "id": "rug_navy",
+   "name": "Rug, navy 2x3 m",
+   "cat": "Living",
+   "file": "rug_navy.glb",
+   "thumb": "thumbs/rug_navy.png",
+   "w": 2.0,
+   "d": 3.0,
+   "h": 0.012,
+   "src": "custom"
+  },
+  {
+   "id": "rug_beige",
+   "name": "Rug, beige 1.6x2.3 m",
+   "cat": "Living",
+   "file": "rug_beige.glb",
+   "thumb": "thumbs/rug_beige.png",
+   "w": 1.6,
+   "d": 2.3,
+   "h": 0.012,
+   "src": "custom"
+  },
+  {
+   "id": "plant_tall",
+   "name": "Tall plant",
+   "cat": "Decor",
+   "file": "plant_tall.glb",
+   "thumb": "thumbs/plant_tall.png",
+   "w": 0.587,
+   "d": 0.633,
+   "h": 1.35,
+   "src": "polyhaven:potted_plant_01"
+  },
+  {
+   "id": "plant_low",
+   "name": "Leafy plant",
+   "cat": "Decor",
+   "file": "plant_low.glb",
+   "thumb": "thumbs/plant_low.png",
+   "w": 0.701,
+   "d": 0.657,
+   "h": 0.842,
+   "src": "polyhaven:potted_plant_02"
+  },
+  {
+   "id": "dining_table",
+   "name": "Dining table (6)",
+   "cat": "Dining",
+   "file": "dining_table.glb",
+   "thumb": "thumbs/dining_table.png",
+   "w": 1.8,
+   "d": 0.9,
+   "h": 0.76,
+   "src": "custom"
+  },
+  {
+   "id": "dining_chair",
+   "name": "Dining chair",
+   "cat": "Dining",
+   "file": "dining_chair.glb",
+   "thumb": "thumbs/dining_chair.png",
+   "w": 0.434,
+   "d": 0.576,
+   "h": 0.973,
+   "src": "polyhaven:dining_chair_02"
+  },
+  {
+   "id": "bistro_table",
+   "name": "Bistro table",
+   "cat": "Dining",
+   "file": "bistro_table.glb",
+   "thumb": "thumbs/bistro_table.png",
+   "w": 0.796,
+   "d": 0.796,
+   "h": 0.746,
+   "src": "polyhaven:round_wooden_table_02"
+  },
+  {
+   "id": "bed_queen",
+   "name": "Queen bed",
+   "cat": "Bedroom",
+   "file": "bed_queen.glb",
+   "thumb": "thumbs/bed_queen.png",
+   "w": 1.6,
+   "d": 2.19,
+   "h": 1.15,
+   "src": "custom"
+  },
+  {
+   "id": "bed_king",
+   "name": "King bed",
+   "cat": "Bedroom",
+   "file": "bed_king.glb",
+   "thumb": "thumbs/bed_king.png",
+   "w": 2.01,
+   "d": 2.19,
+   "h": 1.15,
+   "src": "custom"
+  },
+  {
+   "id": "nightstand",
+   "name": "Nightstand",
+   "cat": "Bedroom",
+   "file": "nightstand.glb",
+   "thumb": "thumbs/nightstand.png",
+   "w": 0.505,
+   "d": 0.509,
+   "h": 0.616,
+   "src": "polyhaven:painted_wooden_nightstand"
+  },
+  {
+   "id": "dresser",
+   "name": "Dresser",
+   "cat": "Bedroom",
+   "file": "dresser.glb",
+   "thumb": "thumbs/dresser.png",
+   "w": 1.715,
+   "d": 1.007,
+   "h": 1.091,
+   "src": "polyhaven:vintage_wooden_drawer_01"
+  },
+  {
+   "id": "desk",
+   "name": "Desk",
+   "cat": "Office",
+   "file": "desk.glb",
+   "thumb": "thumbs/desk.png",
+   "w": 2.0,
+   "d": 0.947,
+   "h": 0.788,
+   "src": "polyhaven:metal_office_desk"
+  },
+  {
+   "id": "small_table",
+   "name": "Small table / desk",
+   "cat": "Office",
+   "file": "small_table.glb",
+   "thumb": "thumbs/small_table.png",
+   "w": 1.134,
+   "d": 0.706,
+   "h": 0.8,
+   "src": "polyhaven:wooden_table_02"
+  }
+ ]
+}

@@ -1,0 +1,193 @@
+{
+ "maps": {
+  "house_floor_diag": {
+   "file": "lm_floor_diag.jpg",
+   "scale": 2.2299
+  },
+  "house_ceiling": {
+   "file": "lm_ceiling.jpg",
+   "scale": 11.2221
+  },
+  "house_floor_sq": {
+   "file": "lm_floor_sq.jpg",
+   "scale": 1.956
+  },
+  "house_floor_kitchen": {
+   "file": "lm_floor_kitchen.jpg",
+   "scale": 1.9972
+  },
+  "house_concrete": {
+   "file": "lm_concrete.jpg",
+   "scale": 3.0945
+  },
+  "house_paint": {
+   "file": "lm_paint.jpg",
+   "scale": 6.0741
+  },
+  "house_trim": {
+   "file": "lm_trim.jpg",
+   "scale": 5.3563
+  },
+  "house_brick": {
+   "file": "lm_brick.jpg",
+   "scale": 2.6242
+  },
+  "house_frontdoor": {
+   "file": "lm_frontdoor.jpg",
+   "scale": 3.0418
+  },
+  "house_garagedoor": {
+   "file": "lm_garagedoor.jpg",
+   "scale": 2.8695
+  },
+  "house_fascia": {
+   "file": "lm_fascia.jpg",
+   "scale": 3.023
+  },
+  "house_siding": {
+   "file": "lm_siding.jpg",
+   "scale": 2.519
+  },
+  "house_cabinet": {
+   "file": "lm_cabinet.jpg",
+   "scale": 2.1882
+  },
+  "house_black": {
+   "file": "lm_black.jpg",
+   "scale": 3.69
+  },
+  "house_granite": {
+   "file": "lm_granite.jpg",
+   "scale": 1.9917
+  },
+  "house_subway": {
+   "file": "lm_subway.jpg",
+   "scale": 1.5084
+  },
+  "house_porcelain": {
+   "file": "lm_porcelain.jpg",
+   "scale": 1.8939
+  },
+  "house_tile_white": {
+   "file": "lm_tile_white.jpg",
+   "scale": 1.5705
+  },
+  "house_tile_blue": {
+   "file": "lm_tile_blue.jpg",
+   "scale": 2.7071
+  },
+  "house_rod": {
+   "file": "lm_rod.jpg",
+   "scale": 1.7777
+  },
+  "house_heater": {
+   "file": "lm_heater.jpg",
+   "scale": 207.0208
+  },
+  "house_blade": {
+   "file": "lm_blade.jpg",
+   "scale": 5.6804
+  },
+  "house_leaf": {
+   "file": "lm_leaf.jpg",
+   "scale": 2.8709
+  },
+  "house_grass": {
+   "file": "lm_grass.jpg",
+   "scale": 3.1204
+  },
+  "house_asphalt": {
+   "file": "lm_asphalt.jpg",
+   "scale": 3.2092
+  },
+  "house_fence": {
+   "file": "lm_fence.jpg",
+   "scale": 2.8776
+  },
+  "house_shingle": {
+   "file": "lm_shingle.jpg",
+   "scale": 3.379
+  },
+  "house_soffit": {
+   "file": "lm_soffit.jpg",
+   "scale": 0.84
+  },
+  "hood_brick": {
+   "file": "lm_hood_brick.jpg",
+   "scale": 2.7401
+  },
+  "hood_shingle_b": {
+   "file": "lm_hood_shingle_b.jpg",
+   "scale": 3.3743
+  },
+  "hood_concrete": {
+   "file": "lm_hood_concrete.jpg",
+   "scale": 3.1267
+  },
+  "hood_fence": {
+   "file": "lm_hood_fence.jpg",
+   "scale": 2.7421
+  },
+  "hood_brick_c": {
+   "file": "lm_hood_brick_c.jpg",
+   "scale": 2.5514
+  },
+  "hood_brick_b": {
+   "file": "lm_hood_brick_b.jpg",
+   "scale": 2.6668
+  },
+  "hood_shingle": {
+   "file": "lm_hood_shingle.jpg",
+   "scale": 3.3417
+  },
+  "hood_siding_b": {
+   "file": "lm_hood_siding_b.jpg",
+   "scale": 2.5805
+  },
+  "hood_siding": {
+   "file": "lm_hood_siding.jpg",
+   "scale": 2.5544
+  },
+  "hood_grass": {
+   "file": "lm_hood_grass.jpg",
+   "scale": 3.2261
+  },
+  "hood_asphalt": {
+   "file": "lm_hood_asphalt.jpg",
+   "scale": 3.2095
+  },
+  "hood_sidewalk": {
+   "file": "lm_hood_sidewalk.jpg",
+   "scale": 3.1904
+  }
+ },
+ "vcol": {
+  "hood_garagedoor": {
+   "scale": 2.7382
+  },
+  "hood_trim": {
+   "scale": 2.8869
+  },
+  "hood_frontdoor": {
+   "scale": 2.4815
+  },
+  "hood_soffit": {
+   "scale": 0.0532
+  },
+  "hood_fascia": {
+   "scale": 3.0642
+  },
+  "hood_black": {
+   "scale": 2.8224
+  },
+  "hood_crapeleaf": {
+   "scale": 2.6952
+  },
+  "hood_oakleaf": {
+   "scale": 2.7298
+  },
+  "hood_bark": {
+   "scale": 1.9844
+  }
+ }
+}

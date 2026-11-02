@@ -1,0 +1,178 @@
+{
+  "name": "2602 Boyd Ave, Killeen TX",
+  "note": "Estimated plan (no floor plan available). Metres. x = east, z = south (street side is z<0), y = up. Room sizes from photo calibration; materials read from the 27 listing photos.",
+  "ceiling": 2.44,
+  "spawn": { "x": 9.6, "z": -6.0, "yaw": 3.1416 },
+  "bounds": [-11, -10.5, 35, 24],
+
+  "rooms": [
+    { "id": "bed2",    "name": "Bedroom 2",        "x0": 0,    "x1": 3.7,  "z0": 0,   "z1": 3.4, "floor": "floor_diag" },
+    { "id": "bath2",   "name": "Hall bath",        "x0": 0,    "x1": 3.7,  "z0": 3.4, "z1": 5.0, "floor": "floor_sq" },
+    { "id": "bed3",    "name": "Bedroom 3",        "x0": 0,    "x1": 3.7,  "z0": 5.0, "z1": 8.6, "floor": "floor_diag" },
+    { "id": "coat",    "name": "Coat closet",      "x0": 3.7,  "x1": 4.9,  "z0": 0,   "z1": 0.9, "floor": "floor_diag", "nav": false },
+    { "id": "hall",    "name": "Hallway",          "x0": 3.7,  "x1": 4.9,  "z0": 0.9, "z1": 7.4, "floor": "floor_diag" },
+    { "id": "linen",   "name": "Linen closet",     "x0": 3.7,  "x1": 4.9,  "z0": 7.4, "z1": 8.6, "floor": "floor_diag", "nav": false },
+    { "id": "bed4",    "name": "Bedroom 4",        "x0": 4.9,  "x1": 8.4,  "z0": 0,   "z1": 3.4, "floor": "floor_diag" },
+    { "id": "entry",   "name": "Entry",            "x0": 8.4,  "x1": 10.8, "z0": 0,   "z1": 3.4, "floor": "floor_diag" },
+    { "id": "living",  "name": "Living room",      "x0": 4.9,  "x1": 10.8, "z0": 3.4, "z1": 8.6, "floor": "floor_diag" },
+    { "id": "primary", "name": "Primary bedroom",  "x0": 10.8, "x1": 16.0, "z0": 0,   "z1": 5.2, "floor": "floor_diag",
+      "extra_floor": [[12.195, 0], [12.972, -0.739], [14.925, -0.739], [15.702, 0]], "extra_ceiling_y": 2.11 },
+    { "id": "closet",  "name": "Walk-in closet",   "x0": 16.0, "x1": 18.4, "z0": 0,   "z1": 2.2, "floor": "floor_sq" },
+    { "id": "pbath",   "name": "Primary bath",     "x0": 16.0, "x1": 18.4, "z0": 2.2, "z1": 5.2, "floor": "floor_sq" },
+    { "id": "kitchen", "name": "Kitchen",          "x0": 10.8, "x1": 13.8, "z0": 5.2, "z1": 8.6, "floor": "floor_kitchen" },
+    { "id": "nook",    "name": "Breakfast nook",   "x0": 13.8, "x1": 17.2, "z0": 5.2, "z1": 8.6, "floor": "floor_sq" },
+    { "id": "laundry", "name": "Laundry",          "x0": 17.2, "x1": 18.4, "z0": 5.2, "z1": 8.6, "floor": "floor_sq" },
+    { "id": "garage",  "name": "Garage",           "x0": 18.4, "x1": 24.6, "z0": 0,   "z1": 6.6, "floor": "concrete", "ceiling": "paint" }
+  ],
+
+  "walls": [
+    { "id": "front", "a": [0, 0], "b": [24.6, 0], "t": 0.2, "ext": true, "h": 2.62, "y0": -0.1, "in": "paint", "out": "brick", "openings": [
+      { "type": "window", "s": 1.85, "w": 1.4, "y0": 0.9, "y1": 2.03 },
+      { "type": "window", "s": 6.65, "w": 1.4, "y0": 0.9, "y1": 2.03 },
+      { "type": "door", "s": 9.6, "w": 0.92, "y1": 2.03, "swing": "L", "open": true, "kind": "front" },
+      { "type": "opening", "s": 13.9485, "w": 3.507, "y1": 2.11, "casing": false },
+      { "type": "garage", "s": 21.5, "w": 4.9, "y1": 2.13 } ] },
+    { "id": "garage_e", "a": [24.6, 0], "b": [24.6, 6.6], "t": 0.2, "ext": true, "h": 2.62, "y0": -0.1, "in": "paint", "out": "siding", "openings": [
+      { "type": "window", "s": 3.3, "w": 0.9, "y0": 1.2, "y1": 2.0 } ] },
+    { "id": "garage_s", "a": [24.6, 6.6], "b": [18.4, 6.6], "t": 0.2, "ext": true, "h": 2.62, "y0": -0.1, "in": "paint", "out": "siding", "openings": [
+      { "type": "door", "s": 4.6, "w": 0.82, "y1": 2.03, "swing": "L", "open": false, "kind": "exterior" } ] },
+    { "id": "laundry_e", "a": [18.4, 6.6], "b": [18.4, 8.6], "t": 0.2, "ext": true, "h": 2.62, "y0": -0.1, "in": "paint", "out": "siding", "openings": [] },
+    { "id": "back", "a": [18.4, 8.6], "b": [0, 8.6], "t": 0.2, "ext": true, "h": 2.62, "y0": -0.1, "in": "paint", "out": "siding", "openings": [
+      { "type": "door", "s": 1.8, "w": 0.82, "y1": 2.03, "swing": "L", "open": false, "kind": "exterior" },
+      { "type": "window", "s": 3.2, "w": 1.4, "y0": 0.9, "y1": 2.03 },
+      { "type": "window", "s": 6.1, "w": 0.9, "y0": 1.07, "y1": 1.98 },
+      { "type": "door", "s": 8.4, "w": 0.82, "y1": 2.03, "swing": "L", "open": true, "kind": "exterior" },
+      { "type": "window", "s": 11.0, "w": 1.6, "y0": 0.9, "y1": 2.03 },
+      { "type": "window", "s": 16.55, "w": 1.4, "y0": 0.9, "y1": 2.03 } ] },
+    { "id": "west", "a": [0, 8.6], "b": [0, 0], "t": 0.2, "ext": true, "h": 2.62, "y0": -0.1, "in": "paint", "out": "siding", "openings": [
+      { "type": "window", "s": 1.8, "w": 1.0, "y0": 0.9, "y1": 2.03 },
+      { "type": "window", "s": 4.4, "w": 0.8, "y0": 1.9, "y1": 2.25 },
+      { "type": "window", "s": 6.9, "w": 1.0, "y0": 0.9, "y1": 2.03 } ] },
+
+    { "id": "bay1", "a": [12.195, 0], "b": [12.972, -0.739], "t": 0.14, "h": 2.36, "y0": -0.1, "in": "paint", "out": "siding", "openings": [
+      { "type": "window", "s": 0.536, "w": 0.5, "y0": 0.6, "y1": 1.95 } ] },
+    { "id": "bay2", "a": [12.972, -0.739], "b": [14.925, -0.739], "t": 0.14, "h": 2.36, "y0": -0.1, "in": "paint", "out": "siding", "openings": [
+      { "type": "window", "s": 0.9765, "w": 1.6, "y0": 0.6, "y1": 1.95 } ] },
+    { "id": "bay3", "a": [14.925, -0.739], "b": [15.702, 0], "t": 0.14, "h": 2.36, "y0": -0.1, "in": "paint", "out": "siding", "openings": [
+      { "type": "window", "s": 0.536, "w": 0.5, "y0": 0.6, "y1": 1.95 } ] },
+
+    { "id": "i_westhall", "a": [3.7, 0], "b": [3.7, 8.6], "t": 0.12, "openings": [
+      { "type": "door", "s": 2.7, "w": 0.8, "swing": "L", "open": true },
+      { "type": "door", "s": 4.4, "w": 0.75, "swing": "L", "open": true },
+      { "type": "door", "s": 5.8, "w": 0.8, "swing": "L", "open": true } ] },
+    { "id": "i_easthall", "a": [4.9, 0], "b": [4.9, 8.6], "t": 0.12, "openings": [
+      { "type": "door", "s": 2.6, "w": 0.8, "swing": "R", "open": true },
+      { "type": "opening", "s": 4.4, "w": 1.6, "y1": 2.1 } ] },
+    { "id": "i_coat", "a": [3.7, 0.9], "b": [4.9, 0.9], "t": 0.12, "openings": [
+      { "type": "door", "s": 0.6, "w": 0.7, "swing": "L", "open": true } ] },
+    { "id": "i_linen", "a": [3.7, 7.4], "b": [4.9, 7.4], "t": 0.12, "openings": [
+      { "type": "door", "s": 0.6, "w": 0.6, "swing": "R", "open": true } ] },
+    { "id": "i_bed2bath", "a": [0, 3.4], "b": [3.7, 3.4], "t": 0.12, "openings": [] },
+    { "id": "i_bathbed3", "a": [0, 5.0], "b": [3.7, 5.0], "t": 0.12, "openings": [] },
+    { "id": "i_bed4living", "a": [4.9, 3.4], "b": [10.8, 3.4], "t": 0.12, "openings": [
+      { "type": "opening", "s": 4.7, "w": 1.6, "y1": 2.1 } ] },
+    { "id": "i_bed4entry", "a": [8.4, 0], "b": [8.4, 3.4], "t": 0.12, "openings": [] },
+    { "id": "i_spine", "a": [10.8, 0], "b": [10.8, 8.6], "t": 0.12, "openings": [
+      { "type": "door", "s": 1.35, "w": 0.86, "swing": "R", "open": true },
+      { "type": "opening", "s": 6.9, "w": 1.6, "y1": 2.1 } ] },
+    { "id": "i_primaryback", "a": [10.8, 5.2], "b": [18.4, 5.2], "t": 0.12, "openings": [] },
+    { "id": "i_primaryeast", "a": [16.0, 0], "b": [16.0, 5.2], "t": 0.12, "openings": [
+      { "type": "door", "s": 1.2, "w": 0.76, "swing": "R", "open": true },
+      { "type": "door", "s": 3.8, "w": 0.76, "swing": "R", "open": true } ] },
+    { "id": "i_closetbath", "a": [16.0, 2.2], "b": [18.4, 2.2], "t": 0.12, "openings": [] },
+    { "id": "i_garage", "a": [18.4, 0], "b": [18.4, 6.6], "t": 0.2, "openings": [
+      { "type": "door", "s": 6.0, "w": 0.82, "swing": "L", "open": true } ] },
+    { "id": "i_nooklaundry", "a": [17.2, 5.2], "b": [17.2, 8.6], "t": 0.12, "openings": [
+      { "type": "door", "s": 1.2, "w": 0.76, "swing": "R", "open": true } ] }
+  ],
+
+  "fixtures": [
+    { "type": "base_cab",   "x": 10.86, "z": 5.26, "rot": 0, "w": 0.74 },
+    { "type": "range",      "x": 11.60, "z": 5.26, "rot": 0, "w": 0.76 },
+    { "type": "base_cab",   "x": 12.36, "z": 5.26, "rot": 0, "w": 0.56 },
+    { "type": "fridge",     "x": 12.92, "z": 5.26, "rot": 0, "w": 0.88 },
+    { "type": "upper",      "x": 10.86, "z": 5.26, "rot": 0, "w": 0.74 },
+    { "type": "hood",       "x": 11.60, "z": 5.26, "rot": 0, "w": 0.76 },
+    { "type": "upper",      "x": 12.36, "z": 5.26, "rot": 0, "w": 0.56 },
+    { "type": "upper",      "x": 12.92, "z": 5.26, "rot": 0, "w": 0.88, "y0": 1.85, "d": 0.6 },
+    { "type": "backsplash", "x": 10.86, "z": 5.26, "rot": 0, "w": 2.06, "y0": 0.93, "y1": 1.37 },
+
+    { "type": "base_cab",   "x": 13.80, "z": 8.50, "rot": 180, "w": 1.03 },
+    { "type": "sink_cab",   "x": 12.77, "z": 8.50, "rot": 180, "w": 0.94 },
+    { "type": "dishwasher", "x": 11.83, "z": 8.50, "rot": 180, "w": 0.6 },
+    { "type": "base_cab",   "x": 11.23, "z": 8.50, "rot": 180, "w": 0.37 },
+    { "type": "upper",      "x": 13.80, "z": 8.50, "rot": 180, "w": 0.98 },
+    { "type": "upper",      "x": 11.78, "z": 8.50, "rot": 180, "w": 0.92 },
+    { "type": "backsplash", "x": 13.80, "z": 8.50, "rot": 180, "w": 0.98, "y0": 0.93, "y1": 1.37 },
+    { "type": "backsplash", "x": 12.82, "z": 8.50, "rot": 180, "w": 1.04, "y0": 0.93, "y1": 1.06 },
+    { "type": "backsplash", "x": 11.78, "z": 8.50, "rot": 180, "w": 0.92, "y0": 0.93, "y1": 1.37 },
+    { "type": "fluor",      "x": 12.3,  "z": 6.9 },
+
+    { "type": "tub",        "x": 0.10,  "z": 4.94, "rot": 270, "w": 1.48, "tile": "tile_white", "tileH": 1.85, "ends": ["left", "right"] },
+    { "type": "toilet",     "x": 1.02,  "z": 3.46, "rot": 0 },
+    { "type": "pedestal",   "x": 1.95,  "z": 3.46, "rot": 0 },
+    { "type": "mirror",     "x": 1.93,  "z": 3.46, "rot": 0, "w": 0.54, "y0": 1.1, "y1": 1.8, "frame": true },
+    { "type": "lightbar",   "x": 1.95,  "z": 3.46, "rot": 0, "w": 0.5, "y": 1.95, "bulbs": 3 },
+
+    { "type": "tub",        "x": 18.30, "z": 2.26, "rot": 90, "w": 1.5, "tile": "tile_blue", "tileH": 1.85, "ends": ["left"], "stub": true },
+    { "type": "toilet",     "x": 18.30, "z": 4.08, "rot": 90 },
+    { "type": "vanity",     "x": 17.55, "z": 5.14, "rot": 180, "w": 1.2 },
+    { "type": "mirror",     "x": 17.50, "z": 5.14, "rot": 180, "w": 1.1, "y0": 1.05, "y1": 2.0 },
+    { "type": "lightbar",   "x": 17.35, "z": 5.14, "rot": 180, "w": 0.7, "y": 2.1, "bulbs": 4 },
+
+    { "type": "shelfrod",   "x": 16.06, "z": 0.10, "rot": 0, "w": 2.24 },
+    { "type": "shelfrod",   "x": 18.30, "z": 0.45, "rot": 90, "w": 1.6 },
+    { "type": "shelfrod",   "x": 3.76,  "z": 0.10, "rot": 0, "w": 1.08 },
+    { "type": "shelves",    "x": 4.84,  "z": 8.50, "rot": 180, "w": 1.08, "d": 0.4, "n": 5 },
+    { "type": "shelfrod",   "x": 18.30, "z": 6.60, "rot": 90, "w": 1.8 },
+
+    { "type": "reachin",    "x": 1.80,  "z": 3.34, "rot": 180, "w": 1.5 },
+    { "type": "reachin",    "x": 0.30,  "z": 5.06, "rot": 0, "w": 1.5 },
+    { "type": "reachin",    "x": 8.34,  "z": 0.40, "rot": 90, "w": 1.5 },
+
+    { "type": "waterheater", "x": 24.1, "z": 6.1 },
+    { "type": "opener",     "x": 21.5,  "z": 3.4 },
+
+    { "type": "fan",  "x": 7.85,  "z": 6.0 },
+    { "type": "fan",  "x": 13.4,  "z": 2.6 },
+    { "type": "dome", "x": 1.85,  "z": 1.7 },
+    { "type": "dome", "x": 1.85,  "z": 6.8 },
+    { "type": "dome", "x": 6.65,  "z": 1.7 },
+    { "type": "dome", "x": 9.6,   "z": 1.7 },
+    { "type": "dome", "x": 4.3,   "z": 4.2 },
+    { "type": "dome", "x": 15.5,  "z": 6.9 },
+    { "type": "dome", "x": 1.85,  "z": 4.2 },
+    { "type": "dome", "x": 17.0,  "z": 3.7 },
+    { "type": "dome", "x": 17.2,  "z": 1.1 },
+    { "type": "dome", "x": 17.8,  "z": 6.9 },
+    { "type": "bulb", "x": 21.5,  "z": 2.0 },
+
+    { "type": "lantern", "x": 10.35, "z": -0.10, "rot": 180, "y": 1.75 },
+    { "type": "lantern", "x": 18.80, "z": -0.10, "rot": 180, "y": 1.9 },
+    { "type": "lantern", "x": 24.30, "z": -0.10, "rot": 180, "y": 1.9 },
+    { "type": "text",    "x": 19.55, "z": -0.11, "rot": 180, "y": 2.24, "text": "2602", "size": 0.2 },
+    { "type": "post",    "x": 8.30,  "z": -1.6 },
+
+    { "type": "shrub", "x": 12.4, "z": -1.25, "s": 0.55 },
+    { "type": "shrub", "x": 13.9, "z": -1.35, "s": 0.6 },
+    { "type": "shrub", "x": 15.4, "z": -1.25, "s": 0.55 },
+    { "type": "shrub", "x": 1.8,  "z": -0.8,  "s": 0.5 },
+    { "type": "shrub", "x": 6.6,  "z": -0.8,  "s": 0.5 },
+    { "type": "crape", "x": 26.6, "z": -2.8,  "s": 1.1 },
+    { "type": "tree",  "x": 6.0,  "z": 16.0,  "s": 1.4 },
+    { "type": "tree",  "x": 21.5, "z": 17.0,  "s": 1.2 },
+    { "type": "tree",  "x": -0.5, "z": 13.0,  "s": 1.0 },
+    { "type": "shrub", "x": 25.5, "z": 12.0,  "s": 1.1 },
+    { "type": "shrub", "x": 12.0, "z": 18.8,  "s": 1.0 }
+  ],
+
+  "site": {
+    "lawn": [-11, -10.5, 35, 24],
+    "driveway": [18.8, -10.5, 24.2, 0],
+    "walk": [[11.0, -1.3, 18.8, -0.4]],
+    "porch": [8.2, -1.75, 11.0, 0],
+    "sidewalk": [-11, -11.6, 35, -10.5],
+    "road": [-11, -18, 35, -11.6],
+    "fence": [[[0, 6.0], [-2.5, 6.0], [-2.5, 20.5], [27.2, 20.5], [27.2, 4.2], [24.6, 4.2]]]
+  }
+}

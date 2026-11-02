@@ -1,0 +1,131 @@
+{
+ "note": "Everything the listing page (index.html) shows. The agent form will write this file. Paths are relative to this folder. Agent details below are SAMPLE placeholders.",
+ "slug": "2602-boyd-ave",
+ "address": {
+  "line1": "2602 Boyd Ave",
+  "city": "Killeen",
+  "state": "TX",
+  "zip": "76543"
+ },
+ "status": "For sale",
+ "price": null,
+ "beds": 4,
+ "baths": 2,
+ "sqft": 1607,
+ "headline": "Brick ranch on a quiet Killeen street",
+ "description": null,
+ "photos": [
+  {
+   "src": "photos/capture.jpg",
+   "alt": "Front of the house"
+  },
+  {
+   "src": "photos/2.jpg"
+  },
+  {
+   "src": "photos/3.jpg"
+  },
+  {
+   "src": "photos/4.jpg"
+  },
+  {
+   "src": "photos/5.jpg"
+  },
+  {
+   "src": "photos/6.jpg"
+  },
+  {
+   "src": "photos/7.jpg"
+  },
+  {
+   "src": "photos/8a.jpg"
+  },
+  {
+   "src": "photos/8b.jpg"
+  },
+  {
+   "src": "photos/9.jpg"
+  },
+  {
+   "src": "photos/10a.jpg"
+  },
+  {
+   "src": "photos/10b.jpg"
+  },
+  {
+   "src": "photos/12.jpg"
+  },
+  {
+   "src": "photos/13a.jpg"
+  },
+  {
+   "src": "photos/13b.jpg"
+  },
+  {
+   "src": "photos/14.jpg"
+  },
+  {
+   "src": "photos/15a.jpg"
+  },
+  {
+   "src": "photos/15b.jpg"
+  },
+  {
+   "src": "photos/16.jpg"
+  },
+  {
+   "src": "photos/17a.jpg"
+  },
+  {
+   "src": "photos/17b.jpg"
+  },
+  {
+   "src": "photos/18.jpg"
+  },
+  {
+   "src": "photos/19a.jpg"
+  },
+  {
+   "src": "photos/19b.jpg"
+  },
+  {
+   "src": "photos/20.jpg"
+  },
+  {
+   "src": "photos/21a.jpg"
+  },
+  {
+   "src": "photos/21b.jpg"
+  }
+ ],
+ "floorplans": [
+  {
+   "src": "media/floorplan.svg",
+   "alt": "Floor plan with room sizes",
+   "label": "Floor plan"
+  },
+  {
+   "src": "media/floorplan-3d.jpg",
+   "alt": "3D floor plan seen from above",
+   "label": "3D plan"
+  },
+  {
+   "src": "media/aerial.jpg",
+   "alt": "The house and its street from above",
+   "label": "Aerial"
+  }
+ ],
+ "tour": {
+  "src": "real/index.html",
+  "poster": "media/tour-poster.jpg"
+ },
+ "agent": {
+  "sample": true,
+  "name": "Your Name",
+  "title": "Listing agent",
+  "brokerage": "Your Brokerage",
+  "phone": "(254) 555-0100",
+  "email": "you@example.com",
+  "photo": null
+ }
+}

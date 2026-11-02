@@ -1,0 +1,72 @@
+{
+  "note": "Ready-made furniture layouts for the buyer furnish tool. items: [catalog id, x, z, rotation in 45-degree steps (0 = front faces +z, 2 = +x, 4 = -z, 6 = -x)]. Plan metres, same frame as plan.json. Living room: the TV sits on the solid west wall (the hall opening is at z 3.6-5.2), the sofa floats facing it ~3 m away, and the strip x 8.8-10.8 is left clear as the walkway from the entry to the back door and kitchen. Nook: no chair at the east end (laundry door).",
+  "presets": [
+    {
+      "id": "family",
+      "name": "Family home",
+      "desc": "TV lounge, dining for 5, king suite, two kids' rooms, home office",
+      "items": [
+        ["rug_navy", 7.2, 6.9, 0], ["tv_console", 5.19, 6.9, 2], ["plant_tall", 5.3, 5.6, 0],
+        ["sofa_modern", 8.46, 6.9, 6], ["coffee_table", 7.2, 6.9, 2], ["side_table", 8.45, 8.3, 6],
+        ["arm_chair", 6.15, 7.85, 3], ["cube_shelf", 6.4, 3.65, 0],
+
+        ["dining_table", 15.5, 6.9, 0],
+        ["dining_chair", 15.0, 6.12, 0], ["dining_chair", 16.0, 6.12, 0],
+        ["dining_chair", 15.0, 7.68, 4], ["dining_chair", 16.0, 7.68, 4],
+        ["dining_chair", 14.3, 6.9, 2],
+
+        ["rug_navy", 13.4, 3.55, 2], ["bed_king", 13.4, 4.02, 4],
+        ["nightstand", 12.05, 4.85, 4], ["nightstand", 14.75, 4.85, 4],
+        ["dresser", 11.4, 3.2, 2], ["arm_chair", 13.9, 0.55, 0],
+
+        ["bed_queen", 1.18, 1.6, 2], ["nightstand", 0.32, 0.42, 2], ["nightstand", 0.32, 2.7, 2], ["plant_low", 3.25, 0.45, 0],
+
+        ["rug_beige", 1.9, 6.45, 0], ["bed_queen", 1.9, 7.42, 4],
+        ["nightstand", 0.55, 8.28, 4], ["nightstand", 3.25, 8.28, 4],
+
+        ["desk", 6.4, 0.56, 0], ["dining_chair", 6.4, 1.45, 4], ["cube_shelf", 7.2, 3.12, 4], ["plant_low", 5.35, 2.95, 0]
+      ]
+    },
+    {
+      "id": "minimal",
+      "name": "Modern minimal",
+      "desc": "Light and open: fewer, simpler pieces",
+      "items": [
+        ["rug_beige", 7.2, 6.9, 0], ["tv_console", 5.19, 6.9, 2], ["plant_tall", 5.3, 5.6, 0],
+        ["sofa_modern", 8.46, 6.9, 6], ["coffee_round", 7.15, 6.9, 0],
+
+        ["bistro_table", 15.3, 6.9, 0], ["dining_chair", 15.3, 6.25, 0], ["dining_chair", 15.3, 7.55, 4],
+
+        ["bed_queen", 13.4, 4.02, 4], ["nightstand", 12.3, 4.85, 4], ["nightstand", 14.5, 4.85, 4],
+        ["plant_low", 15.5, 0.45, 0],
+
+        ["bed_queen", 1.18, 1.6, 2], ["nightstand", 0.32, 0.42, 2],
+
+        ["small_table", 6.4, 0.45, 0], ["dining_chair", 6.4, 1.2, 4]
+      ]
+    },
+    {
+      "id": "wfh",
+      "name": "Work from home",
+      "desc": "Two home offices, lounge seating, dining for 4, guest room",
+      "items": [
+        ["rug_navy", 7.2, 6.9, 0], ["tv_console", 5.19, 6.9, 2], ["plant_tall", 5.3, 5.6, 0],
+        ["sofa_leather", 8.42, 6.9, 6], ["coffee_table", 7.2, 6.9, 2], ["side_table", 8.45, 8.3, 6],
+        ["lounge_chair", 6.2, 7.75, 3], ["sideboard", 6.6, 3.7, 0],
+
+        ["dining_table", 15.5, 6.9, 0],
+        ["dining_chair", 15.0, 6.12, 0], ["dining_chair", 16.0, 6.12, 0],
+        ["dining_chair", 15.0, 7.68, 4], ["dining_chair", 16.0, 7.68, 4],
+
+        ["rug_navy", 13.4, 3.55, 2], ["bed_king", 13.4, 4.02, 4],
+        ["nightstand", 12.05, 4.85, 4], ["nightstand", 14.75, 4.85, 4], ["dresser", 11.4, 3.2, 2],
+
+        ["desk", 6.4, 0.56, 0], ["dining_chair", 6.4, 1.45, 4], ["cube_shelf", 7.2, 3.12, 4], ["plant_low", 5.35, 2.95, 0],
+
+        ["desk", 1.65, 0.56, 0], ["dining_chair", 1.65, 1.45, 4], ["plant_low", 3.2, 0.45, 0],
+
+        ["bed_queen", 1.9, 7.42, 4], ["nightstand", 0.55, 8.28, 4], ["nightstand", 3.25, 8.28, 4]
+      ]
+    }
+  ]
+}

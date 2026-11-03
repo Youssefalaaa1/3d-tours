@@ -1,5 +1,5 @@
 {
- "note": "Everything the listing page (index.html) shows. The agent form will write this file. Paths are relative to this folder. Agent details below are SAMPLE placeholders.",
+ "note": "Everything the listing page (index.html) shows. The agent form will write this file. Paths are relative to this folder. Agent details, description and highlights below are SAMPLE text drawn from the photos and 3D model, for the agent to replace.",
  "slug": "2602-boyd-ave",
  "address": {
   "line1": "2602 Boyd Ave",
@@ -9,15 +9,26 @@
  },
  "status": "For sale",
  "price": null,
+ "type": "Single-family home",
  "beds": 4,
  "baths": 2,
  "sqft": 1607,
- "headline": "Brick ranch on a quiet Killeen street",
- "description": null,
+ "stories": 1,
+ "garage": "2-car attached",
+ "headline": null,
+ "description": "A single-story brick ranch home on a quiet residential street in Killeen. Four bedrooms and two full bathrooms are arranged around a bright living room, with the kitchen opening to a breakfast nook. The primary suite has a bay window, a walk-in closet and its own bath, and the back yard is fully fenced.",
+ "highlights": [
+  "Primary suite with bay window, walk-in closet and private bath",
+  "Kitchen with breakfast nook and laundry room",
+  "Tile flooring throughout the living areas",
+  "Two-car attached garage",
+  "Privacy-fenced back yard backing onto trees",
+  "Quiet street with sidewalks"
+ ],
  "photos": [
   {
    "src": "photos/capture.jpg",
-   "alt": "Front of the house"
+   "alt": "Front of 2602 Boyd Ave: light brick ranch with a two-car garage and a wide lawn"
   },
   {
    "src": "photos/2.jpg"
@@ -101,18 +112,18 @@
  "floorplans": [
   {
    "src": "media/floorplan.svg",
-   "alt": "Floor plan with room sizes",
-   "label": "Floor plan"
+   "label": "Plan",
+   "alt": "Floor plan with room names and sizes"
   },
   {
    "src": "media/floorplan-3d.jpg",
-   "alt": "3D floor plan seen from above",
-   "label": "3D plan"
+   "label": "3D view",
+   "alt": "The house seen from above with the roof removed"
   },
   {
    "src": "media/aerial.jpg",
-   "alt": "The house and its street from above",
-   "label": "Aerial"
+   "label": "Aerial",
+   "alt": "The house and its street from above"
   }
  ],
  "tour": {
@@ -121,11 +132,11 @@
  },
  "agent": {
   "sample": true,
-  "name": "Your Name",
+  "name": "Agent Name",
   "title": "Listing agent",
-  "brokerage": "Your Brokerage",
+  "brokerage": "Brokerage Name",
   "phone": "(254) 555-0100",
-  "email": "you@example.com",
+  "email": "agent@example.com",
   "photo": null
  }
 }

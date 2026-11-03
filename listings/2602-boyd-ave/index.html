@@ -3,252 +3,324 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f6f1e7">
-<title>Listing</title>
-<meta name="description" content="Photos, floor plan and a walk-through 3D tour of this home.">
+<meta name="theme-color" content="#ffffff">
+<title>2602 Boyd Ave, Killeen, TX</title>
+<meta name="description" content="4 beds · 2 baths · 1,607 sq ft. Photos, floor plan and a 3D walk-through tour.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2602 Boyd Ave, Killeen, TX">
+<meta property="og:description" content="4 beds · 2 baths · 1,607 sq ft. Photos, floor plan and a 3D walk-through tour.">
+<meta property="og:url" content="https://youssefalaaa1.github.io/3d-tours/listings/2602-boyd-ave/">
+<meta property="og:image" content="https://youssefalaaa1.github.io/3d-tours/listings/2602-boyd-ave/photos/capture.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f1d1b'/%3E%3Cpath d='M8 15.5 16 9l8 6.5V24H8z' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preload" href="../../lib/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  /* Listing page: everything comes from listing.json (written by the agent form). No CDN: fonts and
-     3D engine are served with the site, so it opens anywhere from a plain link. */
-  @font-face{font-family:'Fraunces';src:url('../../lib/fonts/fraunces-latin.woff2') format('woff2');font-weight:400 700;font-display:swap}
-  @font-face{font-family:'Hanken Grotesk';src:url('../../lib/fonts/hanken-grotesk-latin.woff2') format('woff2');font-weight:400 700;font-display:swap}
+  /* Listing page. Everything comes from listing.json (written by the agent form). Self-contained:
+     the font and the 3D engine are served with the site, so it opens anywhere from a plain link.
+     Direction (PRODUCT.md): calm and premium, the house is the hero, one quiet accent. */
+  @font-face{font-family:'Hanken Grotesk';src:url('../../lib/fonts/hanken-grotesk-latin.woff2') format('woff2');font-weight:100 900;font-display:swap}
   :root{
-    --paper:#f6f1e7; --paper-2:#efe7d8; --card:#fbf8f2; --ink:#1d1b17; --ink-2:#4d473e; --muted:#7a7266;
-    --line:rgba(29,27,23,.12); --accent:#b5572f; --accent-ink:#fff8f1; --shadow:0 18px 40px -22px rgba(48,34,18,.45);
-    --serif:'Fraunces',Georgia,'Times New Roman',serif; --sans:'Hanken Grotesk','Segoe UI',Helvetica,Arial,sans-serif;
-    --gut:clamp(16px,4vw,48px); --max:1180px;
+    --bg:oklch(0.995 0.002 60); --surface:oklch(0.968 0.004 60); --surface-2:oklch(0.94 0.005 60);
+    --ink:oklch(0.22 0.008 60); --ink-2:oklch(0.36 0.008 60); --muted:oklch(0.5 0.008 60);
+    --line:oklch(0.9 0.005 60); --line-strong:oklch(0.8 0.006 60);
+    --accent:oklch(0.55 0.12 52); --on-ink:oklch(0.99 0.002 60);
+    --font:'Hanken Grotesk','Segoe UI',system-ui,-apple-system,Helvetica,Arial,sans-serif;
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+    --r-media:12px; --r-btn:10px;
+    --gut:clamp(16px,4vw,40px); --max:1160px; --measure:66ch;
+    --ease:cubic-bezier(.22,1,.36,1);
+    --z-sticky:10; --z-dock:20; --z-modal:30;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth;scroll-padding-top:72px}
-  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 var(--sans);-webkit-font-smoothing:antialiased;
-    /* faint paper grain */
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .15 0 0 0 0 .1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   img{display:block;max-width:100%}
   button,a{font:inherit;color:inherit}
+  button{cursor:pointer}
+  a{text-decoration:none}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+  h1,h2,h3{text-wrap:balance;margin:0}
+  p{text-wrap:pretty}
+  .ico{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 
-  /* top bar: the site address from the sketch */
-  .bar{position:sticky;top:0;z-index:20;background:rgba(246,241,231,.86);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid var(--line)}
-  .bar .wrap{display:flex;align-items:center;gap:14px;height:60px}
-  .brand{display:flex;align-items:center;gap:9px;text-decoration:none;font-weight:700;letter-spacing:.01em;min-width:0}
-  .brand i{width:26px;height:26px;border-radius:7px;background:var(--ink);display:grid;place-items:center;flex:none}
-  .brand span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px}
-  .brand small{color:var(--muted);font-weight:500}
-  .nav{margin-left:auto;display:flex;gap:4px}
-  .nav a{text-decoration:none;font-size:14px;padding:8px 12px;border-radius:999px;color:var(--ink-2)}
-  .nav a:hover{background:var(--paper-2);color:var(--ink)}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);
-    border-radius:999px;padding:11px 20px;font-weight:600;font-size:15px;text-decoration:none;cursor:pointer;transition:transform .15s,background .15s}
-  .btn:hover{transform:translateY(-1px)}
-  .btn.ghost{background:transparent;color:var(--ink)}
-  .btn.accent{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-  .btn.sm{padding:8px 14px;font-size:13px}
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);min-height:44px;padding:0 var(--s5);border-radius:var(--r-btn);
+    border:1px solid var(--ink);background:var(--ink);color:var(--on-ink);font-weight:600;font-size:15px;white-space:nowrap;
+    transition:background .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease)}
+  .btn:hover{background:var(--ink-2);border-color:var(--ink-2)}
+  .btn:active{transform:translateY(1px)}
+  .btn.line{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+  .btn.line:hover{background:var(--surface);border-color:var(--ink)}
+  .btn.sm{min-height:38px;padding:0 var(--s4);font-size:14px}
 
-  /* intro */
-  .intro{padding:clamp(28px,6vw,72px) 0 clamp(20px,4vw,40px)}
-  .intro .wrap{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end}
-  .status{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-  .status::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(181,87,47,.15)}
-  h1{font-family:var(--serif);font-weight:560;font-size:clamp(40px,8vw,92px);line-height:.95;letter-spacing:-.025em;margin:14px 0 10px;font-variation-settings:'opsz' 144}
-  .city{font-size:clamp(16px,2vw,20px);color:var(--ink-2)}
-  .facts{display:flex;flex-wrap:wrap;gap:0;margin-top:22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .facts div{padding:12px 22px 12px 0;margin-right:22px;border-right:1px solid var(--line)}
-  .facts div:last-child{border-right:0}
-  .facts b{display:block;font-family:var(--serif);font-size:26px;font-weight:560;line-height:1.1}
-  .facts span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-  .price{font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-weight:560;text-align:right}
-  .intro .cta{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-  .headline{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink-2);margin:12px 0 0;max-width:46ch}
+  /* header */
+  .top{position:sticky;top:0;z-index:var(--z-sticky);background:color-mix(in oklch,var(--bg) 88%,transparent);
+    backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
+  .top.scrolled{border-bottom-color:var(--line)}
+  .top .wrap{display:flex;align-items:center;gap:var(--s5);height:64px}
+  .top .home{font-weight:650;font-size:15px;letter-spacing:-.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .top nav{display:flex;gap:var(--s1);margin:0 auto}
+  .top nav a{font-size:14px;color:var(--ink-2);padding:var(--s2) var(--s3);border-radius:8px;transition:color .2s,background .2s}
+  .top nav a:hover{color:var(--ink);background:var(--surface)}
+  .top .acts{display:flex;gap:var(--s2);margin-left:auto}
 
-  /* sections, numbered like the sketch */
-  section.block{padding:clamp(28px,5vw,56px) 0;border-top:1px solid var(--line)}
-  .head{display:flex;align-items:baseline;gap:16px;margin-bottom:20px}
-  .num{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--accent);letter-spacing:.05em}
-  h2{font-family:var(--serif);font-weight:520;font-size:clamp(26px,4vw,40px);letter-spacing:-.015em;margin:0;line-height:1}
-  .head .more{margin-left:auto;font-size:14px;color:var(--muted);white-space:nowrap}
+  /* gallery: the photos are the hero (sketch: listing photos first) */
+  .gallery{position:relative;margin-top:var(--s2)}
+  .mosaic{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,clamp(168px,17vw,256px));gap:var(--s2);border-radius:var(--r-media);overflow:hidden}
+  .mosaic.one{grid-template-columns:1fr;grid-template-rows:clamp(280px,42vw,560px)}
+  .mosaic button{position:relative;border:0;padding:0;margin:0;background:var(--surface-2);overflow:hidden;cursor:zoom-in}
+  .mosaic button:first-child{grid-row:1/3}
+  .mosaic img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease),filter .3s}
+  .mosaic button:hover img{transform:scale(1.025)}
+  .mosaic button:hover{filter:brightness(.97)}
+  .showall{position:absolute;right:var(--s4);bottom:var(--s4);background:var(--bg);color:var(--ink);border:1px solid var(--line-strong);
+    box-shadow:0 1px 2px oklch(0.2 0 0 / .08)}
+  .showall:hover{background:var(--bg);border-color:var(--ink)}
+  .strip{display:none}
 
-  /* scrolling rows (photos, floor plans) */
-  .row{display:grid;grid-auto-flow:column;gap:12px;overflow-x:auto;scroll-snap-type:x proximity;padding:4px 0 18px;margin:0;
-    scrollbar-width:thin;scrollbar-color:var(--line) transparent;-webkit-overflow-scrolling:touch}
-  .row>*{scroll-snap-align:start}
-  .photos{grid-auto-columns:clamp(220px,28vw,340px);grid-template-rows:repeat(2,clamp(150px,19vw,228px))}
-  .photos .tile:first-child{grid-row:span 2;grid-column:span 2}
-  .tile{position:relative;border:0;padding:0;margin:0;border-radius:14px;overflow:hidden;cursor:zoom-in;background:var(--paper-2);box-shadow:var(--shadow)}
-  .tile img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
-  .tile:hover img{transform:scale(1.04)}
-  .tile .cap{position:absolute;left:10px;bottom:10px;background:rgba(251,248,242,.92);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600}
-  .plans{grid-auto-columns:clamp(260px,36vw,420px)}
-  .plans .tile{aspect-ratio:16/10;background:var(--card)}
-  .plans .tile img{object-fit:contain;padding:6px}
-  .plans .tile:not(.svg) img{object-fit:cover;padding:0}
-  .rownav{display:flex;gap:8px;margin-left:12px}
-  .rownav button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);cursor:pointer;display:grid;place-items:center}
-  .rownav button:hover{border-color:var(--ink)}
+  /* title block */
+  .summary{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s6);padding:var(--s6) 0 var(--s7);border-bottom:1px solid var(--line)}
+  .status{display:inline-flex;align-items:center;gap:var(--s2);font-size:14px;font-weight:600;color:var(--ink-2)}
+  .status i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  h1{font-size:clamp(2.1rem,1.3rem + 3.2vw,3.6rem);font-weight:500;letter-spacing:-.025em;line-height:1.04;margin:var(--s3) 0 var(--s2)}
+  .city{font-size:clamp(1rem,.9rem + .4vw,1.2rem);color:var(--ink-2)}
+  .facts{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s4);margin-top:var(--s4);font-size:16px;color:var(--ink-2)}
+  .facts b{color:var(--ink);font-weight:650}
+  .facts .dot{width:3px;height:3px;border-radius:50%;background:var(--line-strong)}
+  .side{display:flex;flex-direction:column;align-items:flex-end;gap:var(--s4);flex:none}
+  .price{font-size:clamp(1.6rem,1.2rem + 1.4vw,2.2rem);font-weight:600;letter-spacing:-.02em;line-height:1}
+  .side .btns{display:flex;gap:var(--s2)}
 
-  /* 3D tour: the wide box with a play button */
-  .tour{position:relative;border-radius:20px;overflow:hidden;background:#14161a;aspect-ratio:16/8;min-height:300px;box-shadow:0 30px 60px -30px rgba(30,22,12,.6)}
-  .tour img.poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .tour::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,12,0) 40%,rgba(10,10,12,.62));pointer-events:none}
-  .tour.live::after{display:none}
-  .play{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:0;background:none;cursor:pointer;color:#fff}
-  .play .ring{width:clamp(76px,10vw,108px);height:clamp(76px,10vw,108px);border-radius:50%;background:rgba(251,248,242,.95);display:grid;place-items:center;
-    box-shadow:0 0 0 10px rgba(251,248,242,.22),0 18px 40px rgba(0,0,0,.35);transition:transform .25s}
-  .play:hover .ring{transform:scale(1.07)}
-  .play .ring svg{margin-left:6px}
-  .play b{font-family:var(--serif);font-size:clamp(20px,2.6vw,30px);font-weight:520;text-shadow:0 2px 12px rgba(0,0,0,.4)}
-  .play small{font-size:13px;opacity:.85}
-  .tourmeta{position:absolute;left:18px;bottom:16px;z-index:3;display:flex;gap:8px;flex-wrap:wrap;pointer-events:none}
-  .chip{background:rgba(251,248,242,.92);color:var(--ink);border-radius:999px;padding:6px 11px;font-size:12px;font-weight:600}
-  .tour iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:4}
-  .tourbar{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap}
-  .tourbar p{margin:0;color:var(--muted);font-size:14px}
+  /* sections */
+  .sec{padding:var(--s8) 0 0}
+  .sec h2{font-size:clamp(1.45rem,1.15rem + 1.1vw,1.9rem);font-weight:600;letter-spacing:-.018em;line-height:1.15}
+  .sec .lede{color:var(--muted);margin:var(--s2) 0 0;max-width:var(--measure)}
+  .sec .bar{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s5);flex-wrap:wrap}
 
-  /* agent card */
-  .agent{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(18px,3vw,36px);align-items:center;background:var(--card);border:1px solid var(--line);
-    border-radius:22px;padding:clamp(20px,3vw,32px);box-shadow:var(--shadow)}
-  .avatar{width:clamp(96px,12vw,132px);aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--paper-2);display:grid;place-items:center;
-    outline:1px solid var(--line);outline-offset:6px}
+  /* about */
+  .about{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:var(--s8);align-items:start}
+  .about .desc{font-size:17px;line-height:1.7;color:var(--ink-2);max-width:var(--measure);margin:var(--s4) 0 0}
+  .hl{list-style:none;padding:0;margin:var(--s5) 0 0;display:grid;grid-template-columns:1fr 1fr;gap:var(--s3) var(--s6)}
+  .hl li{position:relative;padding-left:var(--s5);font-size:15px;line-height:1.5}
+  .hl li::before{content:'';position:absolute;left:2px;top:.62em;width:8px;height:2px;background:var(--accent);border-radius:1px}
+  .specs{margin:var(--s4) 0 0;background:var(--surface);border-radius:var(--r-media);padding:var(--s2) var(--s5)}
+  .specs div{display:flex;justify-content:space-between;gap:var(--s4);padding:var(--s3) 0;border-bottom:1px solid var(--line);font-size:15px}
+  .specs div:last-child{border-bottom:0}
+  .specs dt{color:var(--muted)} .specs dd{margin:0;font-weight:600;text-align:right}
+
+  /* floor plan viewer */
+  .tabs{display:inline-flex;gap:var(--s1);padding:var(--s1);background:var(--surface);border-radius:12px}
+  .tabs button{border:0;background:transparent;border-radius:9px;min-height:36px;padding:0 var(--s4);font-size:14px;font-weight:600;color:var(--ink-2);transition:background .2s,color .2s}
+  .tabs button[aria-selected="true"]{background:var(--bg);color:var(--ink);box-shadow:0 1px 2px oklch(0.2 0 0 / .1)}
+  .plan{display:block;width:100%;border:0;padding:0;background:var(--surface);border-radius:var(--r-media);overflow:hidden;cursor:zoom-in;aspect-ratio:16/9}
+  .plan img{width:100%;height:100%;object-fit:cover}
+  .plan.svg{background:#fff;outline:1px solid var(--line);outline-offset:-1px}
+  .plan.svg img{object-fit:contain;padding:var(--s3)}
+  .note{display:flex;justify-content:space-between;gap:var(--s4);margin-top:var(--s3);font-size:14px;color:var(--muted)}
+
+  /* 3D tour */
+  .tour{position:relative;aspect-ratio:16/9;border-radius:var(--r-media);overflow:hidden;background:oklch(0.2 0.01 250)}
+  .tour .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+  .tour::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,oklch(0.15 0.01 250 / .05),oklch(0.15 0.01 250 / .35));pointer-events:none;transition:opacity .3s}
+  .tour.live::after{opacity:0}
+  .play{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s4);border:0;background:none;color:#fff}
+  .play .disc{width:76px;height:76px;border-radius:50%;background:oklch(1 0 0 / .96);display:grid;place-items:center;
+    box-shadow:0 6px 20px oklch(0.1 0 0 / .25);transition:transform .35s var(--ease)}
+  .play .disc svg{width:26px;height:26px;margin-left:4px;fill:var(--ink)}
+  .play span{font-size:17px;font-weight:600;letter-spacing:-.005em;text-shadow:0 1px 10px oklch(0 0 0 / .45)}
+  .play:hover .disc{transform:scale(1.06)}
+  .tour:hover .poster{transform:scale(1.015)}
+  .tour iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
+  .note a{display:inline-flex;align-items:center;gap:6px;color:var(--ink);font-weight:600}
+  .note a:hover{text-decoration:underline;text-underline-offset:3px}
+
+  /* agent */
+  .agent{display:flex;align-items:center;gap:var(--s6);background:var(--surface);border-radius:var(--r-media);padding:clamp(20px,3vw,32px)}
+  .avatar{width:88px;height:88px;border-radius:50%;flex:none;overflow:hidden;background:var(--surface-2);display:grid;place-items:center;font-size:28px;font-weight:500;color:var(--ink-2)}
   .avatar img{width:100%;height:100%;object-fit:cover}
-  .avatar span{font-family:var(--serif);font-size:40px;color:var(--ink-2)}
-  .agent h3{font-family:var(--serif);font-weight:560;font-size:clamp(24px,3vw,32px);margin:0 0 2px;line-height:1.1}
-  .agent .role{color:var(--muted);font-size:14px}
-  .agent .lines{margin-top:12px;display:grid;gap:4px;font-size:15px}
-  .agent .lines a{text-decoration:none;border-bottom:1px solid var(--line)}
-  .agent .acts{display:flex;flex-direction:column;gap:10px;min-width:180px}
-  .sample{display:inline-block;margin-top:10px;font-size:12px;color:var(--accent);font-weight:600}
+  .agent .who{flex:1;min-width:0}
+  .agent h3{font-size:1.35rem;font-weight:600;letter-spacing:-.012em}
+  .agent .role{color:var(--muted);font-size:15px;margin-top:2px}
+  .agent .lines{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s5);margin-top:var(--s3);font-size:15px}
+  .agent .lines a:hover{text-decoration:underline;text-underline-offset:3px}
+  .agent .acts{display:flex;gap:var(--s2);flex:none}
+  .sample{display:block;margin-top:var(--s3);font-size:13px;color:var(--muted)}
 
-  footer{padding:36px 0 120px;color:var(--muted);font-size:13px}
-  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:20px}
+  footer{margin-top:var(--s9);border-top:1px solid var(--line)}
+  footer .wrap{display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;padding-top:var(--s5);padding-bottom:var(--s7);font-size:13px;color:var(--muted)}
 
-  /* sticky contact bar on phones */
-  .dock{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:30;display:none;gap:8px;padding:8px;border-radius:18px;
-    background:rgba(29,27,23,.94);box-shadow:0 18px 40px -12px rgba(0,0,0,.5);transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  /* phones: contact bar once the title has scrolled away */
+  .dock{position:fixed;left:var(--s3);right:var(--s3);bottom:calc(var(--s3) + env(safe-area-inset-bottom));z-index:var(--z-dock);display:none;gap:6px;padding:6px;
+    border-radius:16px;background:var(--ink);box-shadow:0 10px 30px oklch(0.1 0 0 / .25);transform:translateY(calc(100% + 24px));transition:transform .45s var(--ease)}
   .dock.show{transform:none}
-  .dock a{flex:1;text-align:center;color:var(--paper);text-decoration:none;font-weight:600;font-size:14px;padding:11px 6px;border-radius:12px;background:rgba(255,255,255,.08)}
-  .dock a.main{background:var(--accent)}
+  .dock a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:46px;border-radius:11px;color:var(--on-ink);font-weight:600;font-size:15px}
+  .dock a.main{background:var(--on-ink);color:var(--ink)}
 
   /* lightbox */
-  dialog.lb{border:0;padding:0;margin:0;width:100vw;height:100dvh;max-width:none;max-height:none;background:rgba(18,16,13,.96);color:#f6f1e7}
-  dialog.lb::backdrop{background:rgba(18,16,13,.96)}
-  .lb .stage{position:absolute;inset:56px 0 64px;display:grid;place-items:center;touch-action:pan-y}
-  .lb .stage img{max-width:min(96vw,1400px);max-height:100%;object-fit:contain;border-radius:6px;user-select:none;-webkit-user-drag:none}
-  .lb .stage img.svg{background:#fbf8f2;padding:10px}
-  .lb header{position:absolute;top:0;left:0;right:0;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:14px}
-  .lb header b{font-family:var(--serif);font-weight:520;font-size:18px}
-  .lb .x,.lb .arrow{border:0;background:rgba(255,255,255,.1);color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;display:grid;place-items:center}
-  .lb .arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2}
-  .lb .prev{left:14px} .lb .next{right:14px}
-  .lb .thumbs{position:absolute;left:0;right:0;bottom:8px;height:48px;display:flex;gap:6px;overflow-x:auto;padding:0 16px;justify-content:safe center}
-  .lb .thumbs button{flex:none;width:64px;height:44px;border:2px solid transparent;border-radius:6px;padding:0;overflow:hidden;opacity:.55;cursor:pointer;background:#222}
-  .lb .thumbs button.on{border-color:var(--accent);opacity:1}
+  dialog.lb{border:0;padding:0;margin:0;width:100vw;height:100dvh;max-width:none;max-height:none;background:oklch(0.12 0.005 60);color:#fff;z-index:var(--z-modal)}
+  dialog.lb::backdrop{background:oklch(0.12 0.005 60)}
+  dialog.lb[open]{animation:lbIn .25s var(--ease)}
+  @keyframes lbIn{from{opacity:0}}
+  .lb .head{position:absolute;top:0;left:0;right:0;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--s4);font-size:14px;color:oklch(0.85 0 0)}
+  .lb .head b{color:#fff;font-weight:600}
+  .lb .stage{position:absolute;inset:60px 0 84px;display:grid;place-items:center;padding:0 var(--s4);touch-action:pan-y}
+  .lb .stage img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;user-select:none;-webkit-user-drag:none}
+  .lb .stage img.svg{background:#fff;padding:var(--s3)}
+  .lb .cap{position:absolute;left:0;right:0;bottom:62px;text-align:center;font-size:13px;color:oklch(0.78 0 0);padding:0 var(--s4)}
+  .lb .round{border:0;background:oklch(1 0 0 / .1);color:#fff;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;transition:background .2s}
+  .lb .round:hover{background:oklch(1 0 0 / .2)}
+  .lb .arrow{position:absolute;top:50%;translate:0 -50%;z-index:2}
+  .lb .prev{left:var(--s4)} .lb .next{right:var(--s4)}
+  .lb .thumbs{position:absolute;left:0;right:0;bottom:var(--s2);height:48px;display:flex;gap:6px;overflow-x:auto;padding:0 var(--s4);justify-content:safe center;scrollbar-width:none}
+  .lb .thumbs button{flex:none;width:64px;height:44px;border:0;border-radius:6px;padding:0;overflow:hidden;opacity:.45;background:#222;transition:opacity .2s;outline-offset:2px}
+  .lb .thumbs button.on{opacity:1;outline:2px solid #fff}
   .lb .thumbs img{width:100%;height:100%;object-fit:cover}
 
-  /* load reveal */
-  .rv{opacity:0;transform:translateY(14px);animation:rv .7s cubic-bezier(.2,.7,.2,1) forwards}
-  @keyframes rv{to{opacity:1;transform:none}}
-  @media (prefers-reduced-motion:reduce){.rv{animation:none;opacity:1;transform:none}html{scroll-behavior:auto}}
-
-  @media (max-width:760px){
-    .nav{display:none}
-    .intro .wrap{grid-template-columns:1fr}
-    .intro .cta{align-items:flex-start}
-    .price{text-align:left}
-    .facts div{padding-right:16px;margin-right:16px}
-    .photos{grid-template-rows:repeat(2,150px);grid-auto-columns:200px}
-    .tour{aspect-ratio:4/5;min-height:0}
-    .agent{grid-template-columns:auto 1fr}
-    .agent .acts{grid-column:1/-1;flex-direction:row;min-width:0}
-    .agent .acts .btn{flex:1}
-    .rownav{display:none}
-    h2{white-space:nowrap}
-    #tour .head .more{display:none}
+  @media (max-width:900px){
+    .about{grid-template-columns:1fr;gap:var(--s6)}
+    .top nav{display:none}
+  }
+  @media (max-width:720px){
+    html{scroll-padding-top:72px}
+    .top .wrap{height:56px}
+    .top .acts .btn:not(.share){display:none}
+    .gallery{margin:0 calc(-1 * var(--gut))}
+    .mosaic,.showall{display:none}
+    .strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .strip::-webkit-scrollbar{display:none}
+    .strip button{flex:0 0 100%;scroll-snap-align:start;aspect-ratio:4/3;border:0;padding:0;background:var(--surface-2)}
+    .strip img{width:100%;height:100%;object-fit:cover}
+    .count{position:absolute;right:var(--s3);bottom:var(--s3);background:oklch(0.15 0 0 / .7);color:#fff;font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px;pointer-events:none}
+    .summary{flex-direction:column;align-items:stretch;gap:var(--s5);padding:var(--s5) 0 var(--s6)}
+    .side{align-items:stretch}
+    .side .btns .btn{flex:1}
+    .sec{padding-top:var(--s7)}
+    .hl{grid-template-columns:1fr}
+    .tour{aspect-ratio:4/5}
+    .plan{aspect-ratio:4/3}
+    .agent{flex-wrap:wrap;gap:var(--s4)}
+    .agent .acts{width:100%}
+    .agent .acts .btn{flex:1;padding:0 var(--s3)}
+    .avatar{width:64px;height:64px;font-size:22px}
+    .note{flex-direction:column;gap:var(--s2)}
     .dock{display:flex}
+    footer .wrap{padding-bottom:110px}
+  }
+  @media (min-width:721px){ .count{display:none} }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
   }
 </style>
 </head>
 <body>
-<header class="bar">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.8 2z"/></symbol>
+  <symbol id="i-text" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.2L4 21l1.8-5.4A8 8 0 1 1 21 12z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-l" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol>
+  <symbol id="i-r" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+</svg>
+
+<header class="top" id="top">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Back to top"><i><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f6f1e7" stroke-width="2.6" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3z"/></svg></i>
-      <span id="site">yoururl.com <small>· 3D listing</small></span></a>
-    <nav class="nav"><a href="#photos">Photos</a><a href="#plans">Floor plan</a><a href="#tour">3D tour</a><a href="#agent">Agent</a></nav>
-    <button class="btn sm ghost" id="share">Share</button>
+    <a class="home" href="#" id="homeLink">Listing</a>
+    <nav aria-label="Sections"><a href="#photos">Photos</a><a href="#details">Details</a><a href="#plans">Floor plan</a><a href="#tour">3D tour</a><a href="#agent">Agent</a></nav>
+    <div class="acts">
+      <button class="btn line sm share" id="share"><svg class="ico"><use href="#i-share"/></svg><span>Share</span></button>
+      <a class="btn sm" href="#agent">Contact agent</a>
+    </div>
   </div>
 </header>
 
-<main id="top">
-  <section class="intro">
-    <div class="wrap">
+<main>
+  <div class="wrap">
+    <section class="gallery" id="photos" aria-label="Photos">
+      <div class="mosaic" id="mosaic"></div>
+      <div class="strip" id="strip"></div>
+      <span class="count" id="count"></span>
+      <button class="btn sm showall" id="showall"><svg class="ico"><use href="#i-grid"/></svg><span></span></button>
+    </section>
+
+    <section class="summary" id="details-top">
       <div>
-        <div class="status rv" id="status">For sale</div>
-        <h1 class="rv" style="animation-delay:.06s" id="addr">&nbsp;</h1>
-        <div class="city rv" style="animation-delay:.12s" id="city"></div>
-        <p class="headline rv" style="animation-delay:.16s" id="headline" hidden></p>
-        <div class="facts rv" style="animation-delay:.2s" id="facts"></div>
+        <div class="status" id="status"><i></i><span>For sale</span></div>
+        <h1 id="addr"></h1>
+        <div class="city" id="city"></div>
+        <div class="facts" id="facts"></div>
       </div>
-      <div class="cta rv" style="animation-delay:.26s">
+      <div class="side">
         <div class="price" id="price" hidden></div>
-        <a class="btn accent" href="#tour">Start the 3D tour</a>
-        <a class="btn ghost" href="#agent">Contact the agent</a>
+        <div class="btns">
+          <a class="btn" href="#tour" id="toTour">Explore in 3D</a>
+          <a class="btn line" href="#agent">Contact agent</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="block" id="photos">
-    <div class="wrap">
-      <div class="head"><span class="num">01</span><h2>Listing photos</h2><span class="more" id="pcount"></span>
-        <div class="rownav"><button data-row="prow" data-d="-1" aria-label="Previous photos">‹</button><button data-row="prow" data-d="1" aria-label="More photos">›</button></div></div>
-      <div class="row photos" id="prow"></div>
-    </div>
-  </section>
+    <section class="sec" id="details">
+      <div class="about">
+        <div>
+          <h2>About this home</h2>
+          <p class="desc" id="desc"></p>
+          <ul class="hl" id="hl"></ul>
+        </div>
+        <div>
+          <h2>Home facts</h2>
+          <dl class="specs" id="specs"></dl>
+        </div>
+      </div>
+    </section>
 
-  <section class="block" id="plans">
-    <div class="wrap">
-      <div class="head"><span class="num">02</span><h2>Floor plan</h2><span class="more" id="fcount"></span></div>
-      <div class="row plans" id="frow"></div>
-    </div>
-  </section>
+    <section class="sec" id="plans">
+      <div class="bar">
+        <div><h2>Floor plan</h2><p class="lede">Room sizes are approximate.</p></div>
+        <div class="tabs" role="tablist" aria-label="Floor plan views" id="tabs"></div>
+      </div>
+      <button class="plan" id="plan" aria-label="Open floor plan full screen"><img id="planImg" alt=""></button>
+    </section>
 
-  <section class="block" id="tour-sec">
-    <div class="wrap" id="tour">
-      <div class="head"><span class="num">03</span><h2>3D tour</h2><span class="more">Walk every room · on any phone</span></div>
+    <section class="sec" id="tour">
+      <div class="bar"><div><h2>3D tour</h2><p class="lede">Walk through every room and out onto the street, on any phone or computer.</p></div></div>
       <div class="tour" id="tourbox">
         <img class="poster" id="poster" alt="">
-        <button class="play" id="play" aria-label="Start the 3D tour">
-          <span class="ring"><svg width="34" height="34" viewBox="0 0 24 24" fill="#1d1b17"><path d="M7 4.5v15l13-7.5z"/></svg></span>
-          <b>Walk through the home</b><small>Explore inside and out · try the furniture layouts</small>
-        </button>
-        <div class="tourmeta"><span class="chip">Every room</span><span class="chip">Real street</span><span class="chip">Furnish it</span></div>
+        <button class="play" id="play"><span class="disc"><svg viewBox="0 0 24 24"><path d="M7 4.6v14.8L19.5 12z"/></svg></span><span>Explore in 3D</span></button>
       </div>
-      <div class="tourbar"><p id="tourtip">Drag to look around · W A S D to walk</p>
-        <a class="btn sm ghost" id="fullTour" target="_blank" rel="noopener">Open full screen ↗</a></div>
-    </div>
-  </section>
+      <div class="note"><span id="tourtip">Drag to look around. Use W A S D or the arrow keys to walk.</span>
+        <a id="fullTour" target="_blank" rel="noopener">Open full screen <svg class="ico" style="width:15px;height:15px"><use href="#i-out"/></svg></a></div>
+    </section>
 
-  <section class="block" id="agent">
-    <div class="wrap">
-      <div class="head"><span class="num">04</span><h2>Your agent</h2></div>
+    <section class="sec" id="agent">
+      <div class="bar"><h2>Listing agent</h2></div>
       <div class="agent">
         <div class="avatar" id="avatar"></div>
-        <div>
+        <div class="who">
           <h3 id="aname"></h3>
           <div class="role" id="arole"></div>
           <div class="lines" id="alines"></div>
-          <span class="sample" id="asample" hidden>Sample agent details. The real agent's info appears here.</span>
+          <span class="sample" id="asample" hidden>Sample details. The listing agent's photo and contact info appear here.</span>
         </div>
         <div class="acts" id="aacts"></div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </main>
 
-<footer><div class="wrap"><span id="foot"></span><span>3D tour and listing page</span></div></footer>
-<div class="dock" id="dock"></div>
+<footer><div class="wrap"><span id="foot"></span><span>Information deemed reliable but not guaranteed.</span></div></footer>
+<nav class="dock" id="dock" aria-label="Contact the agent"></nav>
 
 <dialog class="lb" id="lb" aria-label="Photo viewer">
-  <header><b id="lbt"></b><span id="lbc"></span><button class="x" id="lbx" aria-label="Close">✕</button></header>
-  <button class="arrow prev" id="lbp" aria-label="Previous">‹</button>
+  <div class="head"><span><b id="lbt"></b> <span id="lbc"></span></span><button class="round" id="lbx" aria-label="Close"><svg class="ico"><use href="#i-x"/></svg></button></div>
+  <button class="round arrow prev" id="lbp" aria-label="Previous"><svg class="ico"><use href="#i-l"/></svg></button>
   <div class="stage" id="lbs"><img id="lbi" alt=""></div>
-  <button class="arrow next" id="lbn" aria-label="Next">›</button>
+  <button class="round arrow next" id="lbn" aria-label="Next"><svg class="ico"><use href="#i-r"/></svg></button>
+  <div class="cap" id="lbcap"></div>
   <div class="thumbs" id="lbth"></div>
 </dialog>
 
@@ -256,97 +328,135 @@
 const $ = id => document.getElementById(id);
 const L = await fetch('listing.json').then(r => r.json());
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
-const A = L.address, full = `${A.line1}, ${A.city}, ${A.state} ${A.zip || ''}`.trim();
+const num = n => Number(n).toLocaleString('en-US');
+const A = L.address, cityLine = `${A.city}, ${A.state} ${A.zip || ''}`.trim(), full = `${A.line1}, ${cityLine}`;
+const icon = (id, s = '') => `<svg class="ico" ${s}><use href="#i-${id}"/></svg>`;
+const isSvg = s => /\.svg$/i.test(s);
+const photos = L.photos || [], plans = L.floorplans || [];
 
-/* ---------- intro ---------- */
-document.title = `${A.line1} · ${A.city}, ${A.state}`;
-$('site').innerHTML = `${esc(location.hostname && !/^(localhost|[\d.]+)$/.test(location.hostname) ? location.hostname : 'yoururl.com')} <small>· ${esc(A.line1)}</small>`;
-$('status').textContent = L.status || 'For sale';
+/* ---------- title block ---------- */
+document.title = `${A.line1}, ${A.city}, ${A.state}`;
+$('homeLink').textContent = A.line1;
+$('status').querySelector('span').textContent = L.status || 'For sale';
 $('addr').textContent = A.line1;
-$('city').textContent = `${A.city}, ${A.state} ${A.zip || ''}`;
-if (L.headline){ $('headline').textContent = L.headline; $('headline').hidden = false; }
-if (L.price){ $('price').textContent = '$' + Number(L.price).toLocaleString('en-US'); $('price').hidden = false; }
-$('facts').innerHTML = [[L.beds, 'Beds'], [L.baths, 'Baths'], [L.sqft && Number(L.sqft).toLocaleString('en-US'), 'Sq ft']]
-  .filter(f => f[0]).map(([v, k]) => `<div><b>${esc(v)}</b><span>${k}</span></div>`).join('');
+$('city').textContent = cityLine;
+if (L.price){ $('price').textContent = '$' + num(L.price); $('price').hidden = false; }
+const facts = [L.beds && [L.beds, L.beds == 1 ? 'bed' : 'beds'], L.baths && [L.baths, L.baths == 1 ? 'bath' : 'baths'], L.sqft && [num(L.sqft), 'sq ft']].filter(Boolean);
+$('facts').innerHTML = facts.map(([v, k]) => `<span><b>${esc(v)}</b> ${k}</span>`).join('<span class="dot" aria-hidden="true"></span>');
 $('foot').textContent = full;
 
-/* ---------- photo + floor plan rows ---------- */
-const isSvg = s => /\.svg$/i.test(s);
-function fillRow(el, list, kind){
-  el.innerHTML = list.map((p, i) => `<button class="tile${isSvg(p.src) ? ' svg' : ''}" data-i="${i}" aria-label="Open ${kind} ${i + 1}">
-    <img src="${esc(p.src)}" alt="${esc(p.alt || kind + ' ' + (i + 1))}" loading="${i < 4 ? 'eager' : 'lazy'}" decoding="async">
-    ${p.label ? `<span class="cap">${esc(p.label)}</span>` : ''}</button>`).join('');
-  el.onclick = e => { const b = e.target.closest('.tile'); if (b) openLB(list, +b.dataset.i, kind === 'photo' ? 'Photos' : 'Floor plan'); };
+/* ---------- about + facts ---------- */
+if (L.description) $('desc').textContent = L.description; else $('desc').remove();
+$('hl').innerHTML = (L.highlights || []).map(h => `<li>${esc(h)}</li>`).join('');
+const specs = [['Property type', L.type], ['Bedrooms', L.beds], ['Bathrooms', L.baths], ['Living area', L.sqft && `${num(L.sqft)} sq ft`],
+  ['Stories', L.stories], ['Garage', L.garage], ['Status', L.status]].filter(s => s[1] !== undefined && s[1] !== null && s[1] !== '');
+$('specs').innerHTML = specs.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('');
+
+/* ---------- gallery: mosaic on wide screens, swipe strip on phones ---------- */
+const tile = (p, i, eager) => `<button data-i="${i}" aria-label="Open photo ${i + 1} of ${photos.length}"><img src="${esc(p.src)}" alt="${esc(p.alt || `Photo ${i + 1}`)}" loading="${eager ? 'eager' : 'lazy'}" decoding="async"></button>`;
+const mosaicN = photos.length >= 5 ? 5 : 1;
+$('mosaic').classList.toggle('one', mosaicN === 1);
+$('mosaic').innerHTML = photos.slice(0, mosaicN).map((p, i) => tile(p, i, true)).join('');
+$('strip').innerHTML = photos.map((p, i) => tile(p, i, i < 2)).join('');
+$('showall').querySelector('span').textContent = `Show all ${photos.length} photos`;
+const count = () => { const s = $('strip'); $('count').textContent = `${Math.round(s.scrollLeft / Math.max(1, s.clientWidth)) + 1} / ${photos.length}`; };
+$('strip').addEventListener('scroll', count, { passive:true }); count();
+for (const el of [$('mosaic'), $('strip')]) el.onclick = e => { const b = e.target.closest('button'); if (b) openLB(photos, +b.dataset.i, 'Photos'); };
+$('showall').onclick = () => openLB(photos, 0, 'Photos');
+if (!photos.length) $('photos').hidden = true;
+
+/* ---------- floor plan: one large view with tabs ---------- */
+let planI = 0;
+function showPlan(i){
+  planI = i; const p = plans[i];
+  const img = $('planImg');
+  // phones: size the frame to the drawing so a wide plan isn't lost in a tall box
+  img.onload = () => { if (matchMedia('(max-width:720px)').matches) $('plan').style.aspectRatio = Math.max(4 / 3, img.naturalWidth / img.naturalHeight).toFixed(3); };
+  img.src = p.src; img.alt = p.alt || p.label || 'Floor plan';
+  $('plan').classList.toggle('svg', isSvg(p.src));
+  $('tabs').querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-selected', String(k === i)));
 }
-fillRow($('prow'), L.photos || [], 'photo');
-fillRow($('frow'), L.floorplans || [], 'floor plan');
-$('pcount').textContent = `${(L.photos || []).length} photos`;
-$('fcount').textContent = (L.floorplans || []).length > 1 ? `${L.floorplans.length} views` : '';
-if (!(L.floorplans || []).length) $('plans').hidden = true;
-document.querySelectorAll('.rownav button').forEach(b => b.onclick = () => {
-  const r = $(b.dataset.row); r.scrollBy({ left:+b.dataset.d * r.clientWidth * .8, behavior:'smooth' });
-});
+$('tabs').innerHTML = plans.length > 1 ? plans.map((p, i) => `<button role="tab" data-i="${i}">${esc(p.label || `View ${i + 1}`)}</button>`).join('') : '';
+if (plans.length < 2) $('tabs').hidden = true;
+$('tabs').onclick = e => { const b = e.target.closest('button'); if (b) showPlan(+b.dataset.i); };
+$('plan').onclick = () => openLB(plans, planI, 'Floor plan');
+if (plans.length) showPlan(0); else $('plans').hidden = true;
 
 /* ---------- lightbox ---------- */
 const lb = $('lb'); let cur = [], ci = 0;
 function openLB(list, i, title){
   cur = list; $('lbt').textContent = title;
   $('lbth').innerHTML = list.map((p, k) => `<button data-k="${k}" aria-label="Show ${k + 1}"><img src="${esc(p.src)}" alt="" loading="lazy"></button>`).join('');
+  const many = list.length > 1;
+  for (const id of ['lbp', 'lbn', 'lbth']) $(id).hidden = !many;
   show(i); lb.showModal();
 }
 function show(i){
-  ci = (i + cur.length) % cur.length; const p = cur[ci];
-  $('lbi').src = p.src; $('lbi').alt = p.alt || ''; $('lbi').className = isSvg(p.src) ? 'svg' : '';
-  $('lbc').textContent = `${ci + 1} / ${cur.length}`;
+  ci = (i + cur.length) % cur.length; const p = cur[ci], img = $('lbi');
+  img.className = isSvg(p.src) ? 'svg' : ''; img.style.width = '';
+  img.onload = () => {      // small listing photos: show them larger than their pixel size, but only a little
+    if (isSvg(p.src)) return;
+    const st = $('lbs').getBoundingClientRect(), k = Math.min((st.width - 32) / img.naturalWidth, st.height / img.naturalHeight, 1.8);
+    img.style.width = Math.round(img.naturalWidth * k) + 'px';
+  };
+  img.src = p.src; img.alt = p.alt || '';
+  $('lbc').textContent = cur.length > 1 ? `${ci + 1} of ${cur.length}` : '';
+  $('lbcap').textContent = p.label && p.alt ? p.alt : '';
   $('lbth').querySelectorAll('button').forEach((b, k) => { b.classList.toggle('on', k === ci); if (k === ci) b.scrollIntoView({ block:'nearest', inline:'center' }); });
-  const nx = cur[(ci + 1) % cur.length]; if (nx) new Image().src = nx.src;       // preload the next one
+  const nx = cur[(ci + 1) % cur.length]; if (nx) new Image().src = nx.src;
 }
 $('lbp').onclick = () => show(ci - 1); $('lbn').onclick = () => show(ci + 1); $('lbx').onclick = () => lb.close();
 $('lbth').onclick = e => { const b = e.target.closest('button'); if (b) show(+b.dataset.k); };
 lb.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') show(ci - 1); if (e.key === 'ArrowRight') show(ci + 1); });
-let sx = null;                                   // swipe left/right on phones
+let sx = null;
 $('lbs').addEventListener('touchstart', e => sx = e.touches[0].clientX, { passive:true });
 $('lbs').addEventListener('touchend', e => { if (sx === null) return; const d = e.changedTouches[0].clientX - sx; if (Math.abs(d) > 40) show(ci + (d < 0 ? 1 : -1)); sx = null; });
 $('lbs').addEventListener('click', e => { if (e.target === $('lbs')) lb.close(); });
 
-/* ---------- 3D tour: poster + play, loads the walkthrough in place ---------- */
+/* ---------- 3D tour: cover image + play, loads the walkthrough in place ---------- */
 const T = L.tour || {};
-if (matchMedia('(pointer: coarse)').matches) $('tourtip').textContent = 'Left thumb to walk · right thumb to look around';
+if (matchMedia('(pointer: coarse)').matches) $('tourtip').textContent = 'Left thumb to walk, right thumb to look around.';
 if (T.src){
-  $('poster').src = T.poster || (L.photos?.[0]?.src ?? ''); $('poster').alt = `${A.line1} 3D tour`;
+  $('poster').src = T.poster || photos[0]?.src || ''; $('poster').alt = `3D model of ${A.line1} seen from the street`;
   $('fullTour').href = T.src;
-  $('play').onclick = () => {
+  const start = () => {
+    if ($('tourbox').classList.contains('live')) return;
     const f = document.createElement('iframe');
     f.src = T.src + (T.src.includes('?') ? '&' : '?') + 'autostart=1';
     f.title = `${A.line1} 3D tour`; f.allow = 'fullscreen; xr-spatial-tracking'; f.allowFullscreen = true;
-    $('tourbox').classList.add('live'); $('tourbox').appendChild(f);
-    $('play').remove(); document.querySelector('.tourmeta')?.remove();
-    // on phones the tour wants the whole screen: let the iframe go full screen when it can
-    if (matchMedia('(max-width:760px)').matches) f.requestFullscreen?.().catch(() => {});
+    $('tourbox').classList.add('live'); $('tourbox').appendChild(f); $('play').remove();
+    if (matchMedia('(max-width:720px)').matches) f.requestFullscreen?.().catch(() => {});
   };
-} else $('tour-sec').hidden = true;
+  $('play').onclick = start;
+  $('toTour').onclick = () => setTimeout(start, 450);     // scroll there, then start
+} else $('tour').hidden = true;
 
 /* ---------- agent ---------- */
 const G = L.agent || {};
 const initials = (G.name || '?').split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
-$('avatar').innerHTML = G.photo ? `<img src="${esc(G.photo)}" alt="${esc(G.name)}">` : `<span>${esc(initials)}</span>`;
+$('avatar').innerHTML = G.photo ? `<img src="${esc(G.photo)}" alt="${esc(G.name)}">` : esc(initials);
 $('aname').textContent = G.name || '';
 $('arole').textContent = [G.title, G.brokerage].filter(Boolean).join(' · ');
 const tel = (G.phone || '').replace(/[^\d+]/g, '');
-$('alines').innerHTML = [G.phone && `<div><a href="tel:${tel}">${esc(G.phone)}</a></div>`, G.email && `<div><a href="mailto:${esc(G.email)}">${esc(G.email)}</a></div>`].filter(Boolean).join('');
+$('alines').innerHTML = [G.phone && `<a href="tel:${tel}">${esc(G.phone)}</a>`, G.email && `<a href="mailto:${esc(G.email)}">${esc(G.email)}</a>`].filter(Boolean).join('');
 $('asample').hidden = !G.sample;
 const subj = encodeURIComponent(`About ${full}`);
-const acts = [G.phone && ['Call', `tel:${tel}`, 'main'], G.phone && ['Text', `sms:${tel}`], G.email && ['Email', `mailto:${G.email}?subject=${subj}`]].filter(Boolean);
-$('aacts').innerHTML = acts.map(([t, h, m]) => `<a class="btn ${m ? 'accent' : 'ghost'}" href="${esc(h)}">${t}</a>`).join('');
-$('dock').innerHTML = acts.map(([t, h, m]) => `<a class="${m ? 'main' : ''}" href="${esc(h)}">${t}</a>`).join('');
-// phones: contact bar slides in once the intro is scrolled past
+const acts = [G.phone && ['Call', `tel:${tel}`, 'phone', true], G.phone && ['Text', `sms:${tel}`, 'text'], G.email && ['Email', `mailto:${G.email}?subject=${subj}`, 'mail']].filter(Boolean);
+$('aacts').innerHTML = acts.map(([t, h, ic, main]) => `<a class="btn ${main ? '' : 'line'}" href="${esc(h)}">${icon(ic)}${t}</a>`).join('');
+$('dock').innerHTML = acts.map(([t, h, ic, main]) => `<a class="${main ? 'main' : ''}" href="${esc(h)}">${icon(ic)}${t}</a>`).join('');
 const dock = $('dock');
-new IntersectionObserver(([e]) => dock.classList.toggle('show', !e.isIntersecting && acts.length > 0)).observe(document.querySelector('.intro'));
+new IntersectionObserver(([e]) => dock.classList.toggle('show', !e.isIntersecting && acts.length > 0), { rootMargin:'0px 0px -40% 0px' })
+  .observe($('details-top'));
 
-/* ---------- share ---------- */
+/* ---------- header hairline once scrolled; share ---------- */
+const topEl = $('top');
+addEventListener('scroll', () => topEl.classList.toggle('scrolled', scrollY > 8), { passive:true });
 $('share').onclick = async () => {
-  try { if (navigator.share) await navigator.share({ title:document.title, url:location.href }); else { await navigator.clipboard.writeText(location.href); $('share').textContent = 'Link copied'; setTimeout(() => $('share').textContent = 'Share', 1800); } }
-  catch {}
+  const label = $('share').querySelector('span');
+  try {
+    if (navigator.share) await navigator.share({ title:document.title, text:`${full}: photos, floor plan and 3D tour`, url:location.href });
+    else { await navigator.clipboard.writeText(location.href); label.textContent = 'Link copied'; setTimeout(() => label.textContent = 'Share', 1800); }
+  } catch {}
 };
 </script>
 </body>
